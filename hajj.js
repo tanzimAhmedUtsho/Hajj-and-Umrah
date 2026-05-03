@@ -156,7 +156,6 @@ const hajjPackages = [
   },
 ];
 
-// Shared Logic for State Management
 const WISH_KEY = "alsafar_wishlist";
 const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
 let currentHajjFilter = "all";
@@ -171,9 +170,8 @@ function renderHajjDetailed() {
       ? hajjPackages.filter((p) => wishlist.includes(`hajj_${p.id}`))
       : hajjPackages;
 
-  // Max JS Logic for Empty State
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500 italic">No packages found in this category.</div>`;
+    container.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500 italic">No packages found.</div>`;
     return;
   }
 
@@ -187,8 +185,7 @@ function renderHajjDetailed() {
       <div class="p-8 md:p-10">
         ${renderCardContent(pkg)}
       </div>
-    </div>
-  `,
+    </div>`,
     )
     .join("");
 

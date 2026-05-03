@@ -248,7 +248,7 @@ function renderPackages(containerId, filter = "all") {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const wishlist = getWishlist();
+  const wishlist = Wishlist.get();
   let filtered;
 
   if (filter === "wishlist") {
@@ -263,7 +263,7 @@ function renderPackages(containerId, filter = "all") {
 
 function renderPackagesWithData(containerId, data) {
   const container = document.getElementById(containerId);
-  const wishlist = getWishlist();
+  const wishlist = Wishlist.get();
   if (data.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-20 text-center reveal active">
