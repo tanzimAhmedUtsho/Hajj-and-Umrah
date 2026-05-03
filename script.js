@@ -16,6 +16,18 @@ tailwind.config = {
   },
 };
 
+// Wishlist Helper Functions
+const WISH_KEY = "alsafar_wishlist";
+const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+const toggleStoredWishlist = (id, type) => {
+  const itemKey = `${type}_${id}`;
+  let list = getWishlist();
+  if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
+  else list.push(itemKey);
+  localStorage.setItem(WISH_KEY, JSON.stringify(list));
+  return list.includes(itemKey);
+};
+
 // Package Data
 const packages = [
   {
@@ -25,7 +37,6 @@ const packages = [
     price: "$1,299",
     features: ["4-Star Hotel", "Visa & Insurance", "Local Transport"],
     highlight: false,
-    inWishlist: false,
   },
   {
     id: 2,
@@ -38,7 +49,6 @@ const packages = [
       "Premium Mina Tents",
     ],
     highlight: true,
-    inWishlist: false,
   },
   {
     id: 3,
@@ -47,7 +57,6 @@ const packages = [
     price: "$2,800",
     features: ["5-Star Haram View", "Business Class", "Historical Tours"],
     highlight: false,
-    inWishlist: false,
   },
 ];
 
@@ -56,15 +65,17 @@ function renderPackages(containerId, filter = "all") {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  const wishlist = getWishlist();
   let filtered;
+
   if (filter === "wishlist") {
-    filtered = packages.filter((p) => p.inWishlist);
+    filtered = packages.filter((p) => wishlist.includes(`${p.type}_${p.id}`));
   } else {
     filtered =
       filter === "all" ? packages : packages.filter((p) => p.type === filter);
   }
 
-  if (filtered.length === 0 && filter === "wishlist") {
+  if (filtered.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-20 text-center reveal active">
         <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -79,8 +90,8 @@ function renderPackages(containerId, filter = "all") {
       .map(
         (pkg) => `
     <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
-      <button onclick="toggleWishlist(${pkg.id}, this)" class="absolute top-5 right-5 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 ${pkg.inWishlist ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
+      <button onclick="handleToggleWishlist(${pkg.id}, '${pkg.type}', this)" class="absolute top-5 right-5 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`${pkg.type}_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       ${pkg.highlight ? '<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-1 rounded-full font-bold text-[10px] uppercase tracking-widest">VIP Choice</div>' : ""}
       <h4 class="text-xl font-bold mb-2 pr-10 ${pkg.highlight ? "text-white" : ""}">${pkg.name}</h4>
@@ -165,17 +176,15 @@ function closeSearchModal() {
   document.body.style.overflow = "auto";
 }
 
-function toggleWishlist(id, btn) {
-  const pkg = packages.find((p) => p.id === id);
-  if (!pkg) return;
-
-  pkg.inWishlist = !pkg.inWishlist;
+function handleToggleWishlist(id, type, btn) {
+  const isLiked = toggleStoredWishlist(id, type);
   const icon = btn.querySelector("svg");
   if (!icon) return;
 
-  icon.classList.toggle("fill-gold", pkg.inWishlist);
-  icon.classList.toggle("text-gold", pkg.inWishlist);
-  icon.classList.toggle("text-gray-400", !pkg.inWishlist);
+  icon.classList.toggle("fill-gold", isLiked);
+  icon.classList.toggle("text-gold", isLiked);
+  icon.classList.toggle("text-gray-400", !isLiked);
+  lucide.createIcons();
 }
 
 function handleFilter(type, btn) {

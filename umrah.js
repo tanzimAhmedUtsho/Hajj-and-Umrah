@@ -136,17 +136,33 @@ const umrahPackages = [
   },
 ];
 
+// Shared Logic
+const WISH_KEY = "alsafar_wishlist";
+const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+let currentUmrahFilter = "all";
+
 // Render Functions
 function renderUmrahDetailed() {
   const container = document.getElementById("umrah-detailed-grid");
   if (!container) return;
 
-  container.innerHTML = umrahPackages
+  const wishlist = getWishlist();
+  let filtered =
+    currentUmrahFilter === "wishlist"
+      ? umrahPackages.filter((p) => wishlist.includes(`umrah_${p.id}`))
+      : umrahPackages;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No packages in this category.</div>`;
+    return;
+  }
+
+  container.innerHTML = filtered
     .map(
       (pkg) => `
     <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
-      <button onclick="toggleWishlist(this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
+      <button onclick="toggleUmrahWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`umrah_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       <div class="p-8 md:p-10">
         <div class="flex justify-between items-start mb-6">
@@ -218,13 +234,29 @@ function showUmrahItinerary(id) {
   lucide.createIcons();
 }
 
-function toggleWishlist(btn) {
-  const icon = btn.querySelector("svg");
-  if (!icon) return;
-  const isLiked = icon.classList.contains("fill-gold");
-  icon.classList.toggle("fill-gold", !isLiked);
-  icon.classList.toggle("text-gold", !isLiked);
-  icon.classList.toggle("text-gray-400", isLiked);
+function toggleUmrahWishlist(id, btn) {
+  const itemKey = `umrah_${id}`;
+  let list = getWishlist();
+  if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
+  else list.push(itemKey);
+  localStorage.setItem(WISH_KEY, JSON.stringify(list));
+  renderUmrahDetailed();
+}
+
+function initUmrahUI() {
+  const filterArea = document.querySelector(".flex.justify-center.gap-8.mb-12");
+  if (filterArea) {
+    filterArea.innerHTML = `
+            <button onclick="setUmrahFilter('all')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase hover:bg-gold hover:text-black transition-all">All</button>
+            <button onclick="setUmrahFilter('wishlist')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase hover:bg-gold hover:text-black transition-all">My Wishlist</button>
+        `;
+  }
+  renderUmrahDetailed();
+}
+
+function setUmrahFilter(f) {
+  currentUmrahFilter = f;
+  renderUmrahDetailed();
 }
 
 function closeModal() {
@@ -265,4 +297,4 @@ function observeReveal() {
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 }
 
-document.addEventListener("DOMContentLoaded", renderUmrahDetailed);
+document.addEventListener("DOMContentLoaded", initUmrahUI);

@@ -156,30 +156,89 @@ const hajjPackages = [
   },
 ];
 
+// Shared Logic
+const WISH_KEY = "alsafar_wishlist";
+const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+let currentHajjFilter = "all";
+
 // Render Detailed Packages
 function renderHajjDetailed() {
   const container = document.getElementById("hajj-detailed-grid");
   if (!container) return;
 
-  container.innerHTML = hajjPackages
+  const wishlist = getWishlist();
+  let filtered =
+    currentHajjFilter === "wishlist"
+      ? hajjPackages.filter((p) => wishlist.includes(`hajj_${p.id}`))
+      : hajjPackages;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-20 text-center">
+        <p class="text-gray-500 italic">No packages found for this selection.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered
     .map(
       (pkg) => `
     <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
-      <button onclick="toggleWishlist(this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
+      <button onclick="toggleHajjWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`hajj_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
-      <div class="p-8 md:p-10">
-        <div class="flex justify-between items-start mb-6">
-          <div>
-            <span class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] bg-gold/10 px-3 py-1 rounded-full mb-3 inline-block">${pkg.tag}</span>
-            <h3 class="text-2xl md:text-3xl font-serif font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
-          </div>
-          <div class="text-right pt-4">
-            <div class="text-3xl font-bold text-gold">${pkg.price}</div>
-            <div class="text-gray-500 text-xs uppercase tracking-tighter">${pkg.duration}</div>
-          </div>
-        </div>
+      <div class="p-8 md:p-10">${renderCardContent(pkg)}</div>
+    </div>
+  `,
+    )
+    .join("");
 
+  lucide.createIcons();
+  observeReveal();
+}
+
+function renderCardContent(pkg) {
+  return `
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <span class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] bg-gold/10 px-3 py-1 rounded-full mb-3 inline-block">${pkg.tag}</span>
+                <h3 class="text-2xl md:text-3xl font-serif font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
+            </div>
+            <div class="text-right pt-4">
+                <div class="text-3xl font-bold text-gold">${pkg.price}</div>
+                <div class="text-gray-500 text-xs uppercase tracking-tighter">${pkg.duration}</div>
+            </div>
+        </div>
+        ${renderDetailsGrid(pkg)}
+        <div class="border-t border-white/5 pt-8 mb-8">
+            <ul class="grid grid-cols-2 gap-y-3">
+                ${pkg.features
+                  .map(
+                    (feat) => `
+                    <li class="flex items-center gap-2 text-xs text-gray-400">
+                        <i data-lucide="check-circle" class="text-gold w-3 h-3"></i> ${feat}
+                    </li>`,
+                  )
+                  .join("")}
+            </ul>
+        </div>
+        <button onclick="showItinerary(${pkg.id})" class="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold tracking-widest text-xs hover:bg-gold hover:text-black hover:border-gold transition-all duration-300">
+            VIEW COMPLETE ITINERARY
+        </button>
+    `;
+}
+
+function toggleHajjWishlist(id, btn) {
+  const itemKey = `hajj_${id}`;
+  let list = getWishlist();
+  if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
+  else list.push(itemKey);
+  localStorage.setItem(WISH_KEY, JSON.stringify(list));
+  renderHajjDetailed(); // Re-render to update state correctly
+}
+
+function renderDetailsGrid(pkg) {
+  return `
         <div class="grid md:grid-cols-2 gap-6 mb-8 text-left">
           <div class="space-y-4">
             <div class="flex items-start gap-3">
@@ -214,32 +273,7 @@ function renderHajjDetailed() {
             </div>
           </div>
         </div>
-
-        <div class="border-t border-white/5 pt-8 mb-8">
-          <ul class="grid grid-cols-2 gap-y-3">
-            ${pkg.features
-              .map(
-                (feat) => `
-              <li class="flex items-center gap-2 text-xs text-gray-400">
-                <i data-lucide="check-circle" class="text-gold w-3 h-3"></i> ${feat}
-              </li>
-            `,
-              )
-              .join("")}
-          </ul>
-        </div>
-
-        <button onclick="showItinerary(${pkg.id})" class="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold tracking-widest text-xs hover:bg-gold hover:text-black hover:border-gold transition-all duration-300">
-          VIEW COMPLETE ITINERARY
-        </button>
-      </div>
-    </div>
-  `,
-    )
-    .join("");
-
-  lucide.createIcons();
-  observeReveal();
+    `;
 }
 
 // Modal Controls
@@ -275,6 +309,27 @@ function showItinerary(id) {
   modal.classList.add("flex");
   document.body.style.overflow = "hidden";
   lucide.createIcons();
+}
+
+function renderHajjUI() {
+  // Create Filter Buttons dynamically via JS
+  const filterContainer = document.querySelector(
+    ".flex.justify-center.gap-8.mb-12",
+  );
+  if (filterContainer) {
+    filterContainer.innerHTML = `
+            <button onclick="setHajjFilter('all')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all">All Packages</button>
+            <button onclick="setHajjFilter('wishlist')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all flex items-center gap-2">
+                <i data-lucide="heart" class="w-3 h-3"></i> My Wishlist
+            </button>
+        `;
+  }
+  renderHajjDetailed();
+}
+
+function setHajjFilter(filter) {
+  currentHajjFilter = filter;
+  renderHajjDetailed();
 }
 
 function bookPackage(id) {
@@ -333,6 +388,6 @@ function observeReveal() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderHajjDetailed();
+  renderHajjUI();
   initNavbar();
 });
