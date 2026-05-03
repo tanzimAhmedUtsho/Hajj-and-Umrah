@@ -145,7 +145,7 @@ function renderUmrahDetailed() {
     .map(
       (pkg) => `
     <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
-      <button onclick="toggleWishlist(this)" class="absolute top-8 right-8 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+      <button onclick="toggleWishlist(this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
         <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
       </button>
       <div class="p-8 md:p-10">
@@ -154,7 +154,7 @@ function renderUmrahDetailed() {
             <span class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] bg-gold/10 px-3 py-1 rounded-full mb-3 inline-block">${pkg.tag}</span>
             <h3 class="text-2xl md:text-3xl font-serif font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
           </div>
-          <div class="text-right">
+          <div class="text-right pt-4">
             <div class="text-3xl font-bold text-gold">${pkg.price}</div>
             <div class="text-gray-500 text-xs uppercase tracking-tighter">${pkg.duration}</div>
           </div>
