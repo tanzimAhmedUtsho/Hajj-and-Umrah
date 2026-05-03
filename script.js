@@ -142,6 +142,22 @@ function closeSearchModal() {
   document.body.style.overflow = "auto";
 }
 
+// Wishlist Modal Logic
+function openWishlistModal() {
+  const modal = document.getElementById("wishlist-modal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  lucide.createIcons();
+}
+
+function closeWishlistModal() {
+  const modal = document.getElementById("wishlist-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  document.body.style.overflow = "auto";
+}
+
 // Initialize everything on DOM load
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
@@ -153,6 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Search Listeners
   const searchBtn = document.getElementById("navbar-search-btn");
   if (searchBtn) searchBtn.addEventListener("click", openSearchModal);
+
+  const wishlistBtn = document.getElementById("navbar-wishlist-btn");
+  if (wishlistBtn) wishlistBtn.addEventListener("click", openWishlistModal);
 
   const mainSearchBtn = document.getElementById("main-search-btn");
   if (mainSearchBtn) {
