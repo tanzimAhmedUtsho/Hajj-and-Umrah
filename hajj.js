@@ -362,9 +362,19 @@ function bookPackage(id) {
 }
 
 function closeModal() {
-  const modal = document.getElementById("itinerary-modal");
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
+  const modals = [
+    "itinerary-modal",
+    "booking-modal",
+    "search-modal",
+    "wishlist-modal",
+  ];
+  modals.forEach((id) => {
+    const m = document.getElementById(id);
+    if (m) {
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+  });
   document.body.style.overflow = "auto";
 }
 

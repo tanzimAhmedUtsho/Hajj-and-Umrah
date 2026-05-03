@@ -65,9 +65,37 @@ const UI = {
         <div class="flex items-center space-x-6 text-white">
           <i data-lucide="search" id="navbar-search-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
           <i data-lucide="heart" id="navbar-wishlist-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
-          <button onclick="UI.toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden text-gold"><i data-lucide="menu"></i></button>
+          <button onclick="UI.toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden text-gold hover:text-white transition-colors">
+            <i data-lucide="menu"></i>
+          </button>
         </div>
-      </nav>`;
+      </nav>
+      
+      <!-- Mobile Side Menu Overlay -->
+      <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden opacity-0 transition-opacity duration-500" onclick="UI.toggleMobileMenu()"></div>
+      
+      <!-- Mobile Side Menu Panel -->
+      <div id="mobile-menu-panel" class="fixed top-0 right-0 h-screen w-[300px] bg-cardDark z-[101] border-l border-white/5 transform translate-x-full transition-transform duration-500 ease-in-out p-10 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center mb-16">
+          <span class="text-2xl font-bold text-gold tracking-tighter">${this.brand}</span>
+          <button onclick="UI.toggleMobileMenu()" class="text-white/60 hover:text-gold transition-transform hover:rotate-90 duration-300">
+            <i data-lucide="x" class="w-8 h-8"></i>
+          </button>
+        </div>
+        <div class="flex flex-col gap-8">
+          ${this.links.map((link) => `<a href="${link.url}" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white/70 hover:text-gold transition-colors">${link.name}</a>`).join("")}
+        </div>
+        <div class="mt-auto">
+          <div class="w-12 h-1 bg-gold mb-8"></div>
+          <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Developed by</p>
+          <p class="text-gold font-bold uppercase tracking-widest text-xs">${this.owner}</p>
+          <div class="flex gap-4 mt-6 text-gray-500">
+            <i data-lucide="instagram" class="w-5 h-5 hover:text-gold cursor-pointer transition-colors"></i>
+            <i data-lucide="facebook" class="w-5 h-5 hover:text-gold cursor-pointer transition-colors"></i>
+          </div>
+        </div>
+      </div>`;
+    lucide.createIcons();
   },
   renderFooter() {
     const container = document.getElementById("footer-container");
