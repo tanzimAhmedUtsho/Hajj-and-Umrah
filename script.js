@@ -35,6 +35,9 @@ const packages = [
     type: "umrah",
     name: "Umrah Standard",
     price: "$1,299",
+    priceVal: 1299,
+    date: "Nov 2024",
+    distance: 400,
     features: ["4-Star Hotel", "Visa & Insurance", "Local Transport"],
     highlight: false,
   },
@@ -43,6 +46,9 @@ const packages = [
     type: "hajj",
     name: "Royal Hajj Premium",
     price: "$8,500",
+    priceVal: 8500,
+    date: "Dec 2024",
+    distance: 50,
     features: [
       "5-Star Clock Tower",
       "Private VIP Vehicle",
@@ -55,10 +61,119 @@ const packages = [
     type: "umrah",
     name: "Umrah Luxury",
     price: "$2,800",
+    priceVal: 2800,
+    date: "Nov 2024",
+    distance: 200,
     features: ["5-Star Haram View", "Business Class", "Historical Tours"],
     highlight: false,
   },
 ];
+
+// Render Search Bar UI via JS
+function renderSearchBar() {
+  const container = document.getElementById("dynamic-search-container");
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="bg-white dark:bg-cardDark p-8 rounded-2xl shadow-2xl border border-white/5 backdrop-blur-md">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-gold uppercase tracking-widest">Flight Date</label>
+          <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+            <i data-lucide="calendar" class="w-4 h-4 text-gray-400"></i>
+            <input id="search-date" type="text" placeholder="Nov 2024" class="bg-transparent outline-none w-full text-sm" />
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-gold uppercase tracking-widest">Haram Distance</label>
+          <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-gray-400"></i>
+            <select id="search-distance" class="bg-transparent outline-none w-full text-sm appearance-none cursor-pointer">
+              <option value="all" class="bg-black">Any Distance</option>
+              <option value="500" class="bg-black">Under 500m</option>
+              <option value="100" class="bg-black">Walking Distance</option>
+            </select>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-gold uppercase tracking-widest">Price Range</label>
+          <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+            <i data-lucide="wallet" class="w-4 h-4 text-gray-400"></i>
+            <input id="search-price" type="text" placeholder="1000-5000" class="bg-transparent outline-none w-full text-sm" />
+          </div>
+        </div>
+        <button id="main-search-btn" class="bg-gold hover:bg-white text-black font-bold rounded-xl py-3 transition-all flex items-center justify-center gap-2">
+          <i data-lucide="search" class="w-4 h-4"></i> SEARCH
+        </button>
+      </div>
+    </div>
+  `;
+  lucide.createIcons();
+  initSearchLogic();
+}
+
+function initSearchLogic() {
+  const btn = document.getElementById("main-search-btn");
+  btn.addEventListener("click", () => {
+    const dateVal = document.getElementById("search-date").value.toLowerCase();
+    const distVal = document.getElementById("search-distance").value;
+    const priceRange = document.getElementById("search-price").value;
+
+    btn.innerHTML =
+      '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> FILTERING...';
+    lucide.createIcons();
+
+    setTimeout(() => {
+      const filtered = packages.filter((pkg) => {
+        // Date Filter
+        const matchDate = !dateVal || pkg.date.toLowerCase().includes(dateVal);
+
+        // Distance Filter
+        const matchDist =
+          distVal === "all" || pkg.distance <= parseInt(distVal);
+
+        // Price Filter Logic
+        let matchPrice = true;
+        if (priceRange.includes("-")) {
+          const [min, max] = priceRange
+            .split("-")
+            .map((v) => parseInt(v.trim()));
+          matchPrice = pkg.priceVal >= min && pkg.priceVal <= max;
+        } else if (priceRange) {
+          matchPrice = pkg.priceVal <= parseInt(priceRange);
+        }
+
+        return matchDate && matchDist && matchPrice;
+      });
+
+      displayFilteredResults(filtered);
+      btn.innerHTML = '<i data-lucide="search" class="w-4 h-4"></i> SEARCH';
+      lucide.createIcons();
+
+      if (filtered.length > 0) {
+        document
+          .getElementById("packages")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+    }, 800);
+  });
+}
+
+function displayFilteredResults(filteredData) {
+  const container = document.getElementById("package-grid");
+  if (!container) return;
+
+  if (filteredData.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-10 text-center text-gray-500 italic">
+        No packages match your specific criteria. Please try different filters.
+      </div>`;
+    return;
+  }
+
+  // Re-use rendering logic but with provided data
+  renderPackagesWithData("package-grid", filteredData);
+}
 
 // Render Packages
 function renderPackages(containerId, filter = "all") {
@@ -75,7 +190,13 @@ function renderPackages(containerId, filter = "all") {
       filter === "all" ? packages : packages.filter((p) => p.type === filter);
   }
 
-  if (filtered.length === 0) {
+  renderPackagesWithData(containerId, filtered);
+}
+
+function renderPackagesWithData(containerId, data) {
+  const container = document.getElementById(containerId);
+  const wishlist = getWishlist();
+  if (data.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-20 text-center reveal active">
         <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -86,7 +207,7 @@ function renderPackages(containerId, filter = "all") {
       </div>
     `;
   } else {
-    container.innerHTML = filtered
+    container.innerHTML = data
       .map(
         (pkg) => `
     <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
@@ -216,6 +337,7 @@ function closeWishlistModal() {
 // Initialize everything on DOM load
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
+  renderSearchBar();
   renderPackages("package-grid");
   if (document.getElementById("hajj-only-grid")) {
     renderPackages("hajj-only-grid", "hajj");
@@ -227,21 +349,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const wishlistBtn = document.getElementById("navbar-wishlist-btn");
   if (wishlistBtn) wishlistBtn.addEventListener("click", openWishlistModal);
-
-  const mainSearchBtn = document.getElementById("main-search-btn");
-  if (mainSearchBtn) {
-    mainSearchBtn.addEventListener("click", () => {
-      mainSearchBtn.innerHTML =
-        '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> SEARCHING...';
-      lucide.createIcons();
-      setTimeout(() => {
-        mainSearchBtn.innerHTML =
-          '<i data-lucide="search" class="w-4 h-4"></i> SEARCH';
-        lucide.createIcons();
-        alert("Showing customized packages for your criteria...");
-      }, 1500);
-    });
-  }
 });
 
 // Navbar Scroll Effect
