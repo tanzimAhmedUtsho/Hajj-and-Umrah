@@ -80,6 +80,29 @@
               <div class="space-y-2">
                 <label
                   class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Income Certificate (PDF/Image)</label
+                >
+                <div class="relative group">
+                  <input
+                    type="file"
+                    id="income-cert"
+                    required
+                    class="hidden"
+                    accept=".pdf,image/*"
+                    onchange="updateFileName(this)"
+                  />
+                  <label
+                    for="income-cert"
+                    class="flex items-center gap-3 w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 cursor-pointer group-hover:border-gold/50 transition-all text-sm text-gray-400"
+                  >
+                    <i data-lucide="upload-cloud" class="w-5 h-5 text-gold"></i>
+                    <span id="file-name">Upload Certificate</span>
+                  </label>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
                   >Why do you need support?</label
                 >
                 <textarea
