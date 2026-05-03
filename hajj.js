@@ -34,6 +34,23 @@ const hajjPackages = [
       "Health Insurance",
     ],
     tag: "Most Affordable",
+    itinerary: [
+      {
+        day: "Day 01-15",
+        activity:
+          "Makkah Stay: Focus on Ibadah at Masjid Al-Haram. Daily lectures by group leaders.",
+      },
+      {
+        day: "Day 16-20",
+        activity:
+          "Hajj Rituals: Movement to Mina, Arafat, and Muzdalifah with standard Moallim services.",
+      },
+      {
+        day: "Day 21-30",
+        activity:
+          "Madinah Stay: Ziyarah of Prophet's Mosque and historical sites around Madinah.",
+      },
+    ],
   },
   {
     id: 2,
@@ -51,6 +68,23 @@ const hajjPackages = [
       "Laundry Service",
     ],
     tag: "Best Seller",
+    itinerary: [
+      {
+        day: "Day 01-10",
+        activity:
+          "Makkah Stay: 4-Star accommodation within walking distance. Full board meals.",
+      },
+      {
+        day: "Day 11-15",
+        activity:
+          "Hajj Rituals: Upgraded Mina tents with better facilities and private bus transport.",
+      },
+      {
+        day: "Day 16-22",
+        activity:
+          "Madinah Stay: Premium accommodation near Markazia and group Ziyarah sessions.",
+      },
+    ],
   },
   {
     id: 3,
@@ -68,6 +102,23 @@ const hajjPackages = [
       "Kit Bag & Gifts",
     ],
     tag: "Luxury Experience",
+    itinerary: [
+      {
+        day: "Day 01-05",
+        activity:
+          "Arrival in Makkah: VIP Check-in at 5-Star Hotel. Welcome ceremony and orientation.",
+      },
+      {
+        day: "Day 06-10",
+        activity:
+          "VIP Hajj Days: Sofa beds in Mina, high-end catering, and scholars for guidance.",
+      },
+      {
+        day: "Day 11-16",
+        activity:
+          "Madinah Luxury: 5-Star stay with easy access to Rawdah and exclusive tours.",
+      },
+    ],
   },
   {
     id: 4,
@@ -85,6 +136,23 @@ const hajjPackages = [
       "Personal Assistance",
     ],
     tag: "Royal Premium",
+    itinerary: [
+      {
+        day: "Day 01-05",
+        activity:
+          "Royal Makkah: Stay at Clock Tower with direct Haram view. 24/7 personal butler.",
+      },
+      {
+        day: "Day 06-10",
+        activity:
+          "Elite Hajj: Private tents in Mina with AC and luxury bedding. GMC transfers.",
+      },
+      {
+        day: "Day 11-14",
+        activity:
+          "Royal Madinah: Stay at Oberoi. Private Ziyarah and airport VIP lounge access.",
+      },
+    ],
   },
 ];
 
@@ -158,7 +226,7 @@ function renderHajjDetailed() {
           </ul>
         </div>
 
-        <button class="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold tracking-widest text-xs hover:bg-gold hover:text-black hover:border-gold transition-all duration-300">
+        <button onclick="showItinerary(${pkg.id})" class="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold tracking-widest text-xs hover:bg-gold hover:text-black hover:border-gold transition-all duration-300">
           VIEW COMPLETE ITINERARY
         </button>
       </div>
@@ -169,6 +237,48 @@ function renderHajjDetailed() {
 
   lucide.createIcons();
   observeReveal();
+}
+
+// Modal Controls
+function showItinerary(id) {
+  const pkg = hajjPackages.find((p) => p.id === id);
+  const modal = document.getElementById("itinerary-modal");
+  const content = document.getElementById("modal-content");
+
+  content.innerHTML = `
+    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">${pkg.name}</h2>
+    <p class="text-gold font-bold mb-8 tracking-widest uppercase text-xs">${pkg.duration} Complete Journey Plan</p>
+    
+    <div class="space-y-8 mb-10">
+      ${pkg.itinerary
+        .map(
+          (item) => `
+        <div class="flex gap-6 border-l-2 border-gold/30 pl-6 pb-2">
+          <div class="text-gold font-bold whitespace-nowrap pt-1 text-xs uppercase tracking-widest">${item.day}</div>
+          <div class="text-gray-300 leading-relaxed text-sm">${item.activity}</div>
+        </div>
+      `,
+        )
+        .join("")}
+    </div>
+
+    <div class="p-6 bg-white/5 rounded-2xl border border-white/5 text-center">
+      <p class="text-gray-400 text-xs mb-4 italic">Ready to start your spiritual journey?</p>
+      <button class="bg-gold text-black font-bold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-white transition-all">BOOK THIS PACKAGE</button>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  lucide.createIcons();
+}
+
+function closeModal() {
+  const modal = document.getElementById("itinerary-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  document.body.style.overflow = "auto";
 }
 
 // Navbar Scroll Effect

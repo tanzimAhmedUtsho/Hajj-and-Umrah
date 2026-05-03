@@ -65,15 +65,24 @@
             Sacred Hajj <span class="text-gold">2024-25</span>
           </h1>
           <p class="text-gray-400 max-w-3xl mx-auto mb-16 text-lg">
-            আপনার আধ্যাত্মিক যাত্রাকে স্মরণীয় ও আরামদায়ক করতে আমরা নিয়ে এসেছি বিশেষায়িত হজ প্যাকেজ। 
-            সেরা হোটেল, দক্ষ গাইড এবং নিরবচ্ছিন্ন সেবার নিশ্চয়তা।
+            আপনার আধ্যাত্মিক যাত্রাকে স্মরণীয় ও আরামদায়ক করতে আমরা নিয়ে এসেছি
+            বিশেষায়িত হজ প্যাকেজ। সেরা হোটেল, দক্ষ গাইড এবং নিরবচ্ছিন্ন সেবার
+            নিশ্চয়তা।
           </p>
         </div>
 
         <!-- Filter or Stats could go here -->
-        <div class="flex justify-center gap-8 mb-12 text-sm text-gold/80 font-bold uppercase tracking-widest reveal">
-          <span><i data-lucide="award" class="inline w-4 h-4 mr-2"></i> Ministry Approved</span>
-          <span><i data-lucide="shield-check" class="inline w-4 h-4 mr-2"></i> VIP Services</span>
+        <div
+          class="flex justify-center gap-8 mb-12 text-sm text-gold/80 font-bold uppercase tracking-widest reveal"
+        >
+          <span
+            ><i data-lucide="award" class="inline w-4 h-4 mr-2"></i> Ministry
+            Approved</span
+          >
+          <span
+            ><i data-lucide="shield-check" class="inline w-4 h-4 mr-2"></i> VIP
+            Services</span
+          >
         </div>
 
         <div
@@ -81,9 +90,33 @@
           class="grid grid-cols-1 lg:grid-cols-2 gap-10"
         >
           <!-- JS will render detailed Hajj packages here -->
-        </h1>
+        </div>
       </div>
     </section>
+
+    <!-- Itinerary Modal -->
+    <div
+      id="itinerary-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8"
+    >
+      <div
+        class="absolute inset-0 bg-black/90 backdrop-blur-sm"
+        onclick="closeModal()"
+      ></div>
+      <div
+        class="relative bg-cardDark border border-white/10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2.5rem] p-8 md:p-12 shadow-2xl custom-scrollbar reveal active"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-6 right-6 text-gray-500 hover:text-gold transition-colors"
+        >
+          <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div id="modal-content">
+          <!-- Content injected by JS -->
+        </div>
+      </div>
+    </div>
 
     <footer class="bg-black py-12 px-8 border-t border-white/5 text-center">
       <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
