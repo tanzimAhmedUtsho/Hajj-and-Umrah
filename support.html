@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Application | Al-Safar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script src="support.js" defer></script>
+  </head>
+  <body class="bg-primaryDark text-gray-100 font-sans">
+    <nav id="navbar-container" class="sticky top-0 w-full z-50"></nav>
+
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 reveal">
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+            Financial Support Application
+          </h1>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            পবিত্র হজ্জ বা উমরাহ পালনে আপনার স্বপ্ন পূরণে আমরা আপনার পাশে আছি।
+            অনুগ্রহ করে নিচের ফর্মটি পূরণ করুন অথবা সরাসরি যোগাযোগ করুন।
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Application Form -->
+          <div
+            class="bg-cardDark p-8 rounded-[2rem] border border-white/5 shadow-2xl reveal"
+          >
+            <h2 class="text-2xl font-bold text-gold mb-8">Application Form</h2>
+            <form id="support-form" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    required
+                    id="support-name"
+                    placeholder="আপনার নাম"
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    required
+                    id="support-phone"
+                    placeholder="মোবাইল নম্বর"
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Monthly Income (BDT)</label
+                >
+                <input
+                  type="number"
+                  required
+                  id="support-income"
+                  placeholder="মাসিক আয়"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Why do you need support?</label
+                >
+                <textarea
+                  id="support-reason"
+                  required
+                  rows="4"
+                  placeholder="আপনার বিস্তারিত সমস্যা লিখুন..."
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm resize-none"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full py-4 rounded-xl bg-gold text-black font-bold uppercase tracking-widest hover:bg-white transition-all duration-300"
+              >
+                Submit Application
+              </button>
+            </form>
+          </div>
+
+          <!-- Direct Support Options -->
+          <div class="space-y-8 reveal">
+            <h2 class="text-2xl font-bold text-gold mb-8">Direct Support</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <a
+                href="https://wa.me/8801756467670"
+                target="_blank"
+                class="bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-gold/30 transition-all group"
+              >
+                <i
+                  data-lucide="message-circle"
+                  class="text-gold w-8 h-8 mb-4"
+                ></i>
+                <h3 class="font-bold mb-2">WhatsApp Support</h3>
+                <p class="text-xs text-gray-500">সরাসরি কথা বলতে ক্লিক করুন।</p>
+              </a>
+              <a
+                href="tel:+8801756467670"
+                class="bg-white/5 p-6 rounded-2xl border border-white/5 hover:border-gold/30 transition-all group"
+              >
+                <i data-lucide="phone-call" class="text-gold w-8 h-8 mb-4"></i>
+                <h3 class="font-bold mb-2">Voice Call</h3>
+                <p class="text-xs text-gray-500">সরাসরি কল করুন আমাদের।</p>
+              </a>
+            </div>
+
+            <div class="bg-gold/5 p-8 rounded-[2rem] border border-gold/10">
+              <h3 class="font-bold text-gold mb-4 flex items-center gap-2">
+                <i data-lucide="info" class="w-5 h-5"></i> Important Note
+              </h3>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                আপনার আবেদনটি আমাদের বিশেষজ্ঞ টিম পর্যালোচনা করবে। আমরা আপনার
+                তথ্যের গোপনীয়তা নিশ্চিত করি। আবেদন জমা দেওয়ার ২-৩ কার্যদিবসের
+                মধ্যে আপনার সাথে যোগাযোগ করা হবে ইনশাআল্লাহ।
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Chat Widget Overlay -->
+    <div
+      id="live-chat-box"
+      class="fixed bottom-6 right-6 z-[200] w-80 translate-y-20 opacity-0 hidden transition-all duration-500"
+    >
+      <div
+        class="bg-cardDark border border-gold/20 rounded-3xl shadow-2xl overflow-hidden"
+      >
+        <div class="bg-gold p-4 flex justify-between items-center">
+          <div class="flex items-center gap-2 text-black font-bold">
+            <div class="w-2 h-2 bg-green-600 rounded-full animate-pulse"></div>
+            Al-Safar Support
+          </div>
+          <button
+            onclick="toggleChat()"
+            class="text-black hover:scale-110 transition-transform"
+          >
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div
+          id="chat-messages"
+          class="h-64 p-4 overflow-y-auto flex flex-col gap-3 text-sm custom-scrollbar"
+        >
+          <div
+            class="bg-white/5 p-3 rounded-2xl rounded-tl-none self-start max-w-[80%]"
+          >
+            Assalamu Alaikum! How can we help you today?
+          </div>
+        </div>
+        <div class="p-4 border-t border-white/5 flex gap-2">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Type a message..."
+            class="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 outline-none text-xs"
+          />
+          <button
+            onclick="sendMessage()"
+            class="bg-gold text-black p-2 rounded-full"
+          >
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button
+      onclick="toggleChat()"
+      id="chat-trigger"
+      class="fixed bottom-6 right-6 z-[190] bg-gold text-black p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
+    >
+      <i data-lucide="message-square" class="w-6 h-6"></i>
+    </button>
+
+    <footer id="footer-container"></footer>
+
+    <div
+      id="support-toast"
+      class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[300] translate-y-20 opacity-0 transition-all duration-500"
+    >
+      <div
+        class="bg-gold text-black px-8 py-4 rounded-2xl font-bold shadow-2xl flex items-center gap-3"
+      >
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        Application Submitted Successfully!
+      </div>
+    </div>
+  </body>
+</html>
