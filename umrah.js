@@ -221,10 +221,24 @@ function closeModal() {
 }
 
 function bookUmrah(id) {
-  alert(
-    "Assalamu Alaikum! Your request for Umrah booking has been received. We will contact you shortly.",
-  );
-  closeModal();
+  const pkg = umrahPackages.find((p) => p.id === id);
+  const content = document.getElementById("modal-content");
+
+  content.innerHTML = `
+    <div class="text-center py-12 reveal active">
+      <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
+        <i data-lucide="heart" class="text-gold w-10 h-10"></i>
+      </div>
+      <h2 class="text-4xl font-serif font-bold text-white mb-4">Mubarak!</h2>
+      <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Umrah Booking Initiated</p>
+      <p class="text-gray-400 leading-relaxed mb-10 text-sm">
+        Your request for the <span class="text-gold font-bold">${pkg.name}</span> has been successfully logged. 
+        A dedicated guide from <strong>Al-Safar</strong> will reach out to you soon.
+      </p>
+      <button onclick="closeModal()" class="bg-white/5 border border-gold/30 text-gold font-bold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-gold hover:text-black transition-all uppercase">Done</button>
+    </div>
+  `;
+  lucide.createIcons();
 }
 
 function observeReveal() {

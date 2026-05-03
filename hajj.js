@@ -279,13 +279,17 @@ function bookPackage(id) {
   const content = document.getElementById("modal-content");
 
   content.innerHTML = `
-    <div class="text-center py-16 reveal active">
-      <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-8">
-        <i data-lucide="check-circle" class="text-gold w-10 h-10"></i>
+    <div class="text-center py-12 reveal active">
+      <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
+        <i data-lucide="scroll" class="text-gold w-10 h-10"></i>
       </div>
-      <h2 class="text-4xl font-serif font-bold text-white mb-4">Request Received</h2>
-      <p class="text-gray-400 max-w-md mx-auto mb-10 leading-relaxed">Assalamu Alaikum! Thank you for choosing the <span class="text-gold font-bold">${pkg.name}</span>. Our dedicated spiritual travel consultant will contact you shortly to finalize the details.</p>
-      <button onclick="closeModal()" class="border border-gold text-gold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-gold hover:text-black transition-all uppercase font-bold">Close Window</button>
+      <h2 class="text-4xl font-serif font-bold text-white mb-4">Booking Requested</h2>
+      <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Sacred Hajj Journey</p>
+      <p class="text-gray-400 leading-relaxed mb-10 text-sm">
+        Assalamu Alaikum! You've expressed interest in <span class="text-gold font-bold">${pkg.name}</span>. 
+        Our chief consultant <strong>Tanzim Ahmed Utsho</strong> will prioritize your request and contact you shortly.
+      </p>
+      <button onclick="closeModal()" class="bg-gold text-black font-bold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-white transition-all uppercase">Acknowledge</button>
     </div>
   `;
   lucide.createIcons();

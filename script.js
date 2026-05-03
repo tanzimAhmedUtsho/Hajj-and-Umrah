@@ -88,10 +88,39 @@ function renderPackages(containerId, filter = "all") {
 
 function bookDirect(id) {
   const pkg = packages.find((p) => p.id === id);
-  alert(
-    `Assalamu Alaikum! You have selected the ${pkg.name}. Our team will contact you soon for the booking process.`,
-  );
-  window.location.href = "#contact";
+  const modal = document.getElementById("booking-modal");
+  const content = document.getElementById("booking-modal-content");
+
+  content.innerHTML = `
+    <div class="text-center py-8 reveal active">
+      <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
+        <i data-lucide="check-circle" class="text-gold w-12 h-12"></i>
+      </div>
+      <h2 class="text-4xl font-serif font-bold text-white mb-4">Request Sent</h2>
+      <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Spiritual Journey Awaits</p>
+      <p class="text-gray-400 leading-relaxed mb-10 text-sm">
+        Assalamu Alaikum! You have selected the <span class="text-gold font-bold">${pkg.name}</span>. 
+        Our dedicated consultant, <strong>Tanzim Ahmed Utsho</strong>, will contact you personally within 24 hours to guide you through the next steps.
+      </p>
+      <div class="flex flex-col gap-4">
+        <button onclick="closeBookingModal()" class="w-full bg-gold text-black font-bold py-4 rounded-xl text-xs tracking-widest uppercase hover:bg-white transition-all">
+          CLOSE WINDOW
+        </button>
+      </div>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  lucide.createIcons();
+}
+
+function closeBookingModal() {
+  const modal = document.getElementById("booking-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  document.body.style.overflow = "auto";
 }
 
 // Initialize everything on DOM load
