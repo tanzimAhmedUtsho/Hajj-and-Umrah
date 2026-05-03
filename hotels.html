@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Hotels | Al-Safar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="hotels.js" defer></script>
+    <style>
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-primaryDark text-gray-100 font-sans">
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 py-6 px-8 md:px-16 flex justify-between items-center bg-black/50 backdrop-blur-md"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 bg-gold rounded-full flex items-center justify-center"
+        >
+          <i data-lucide="compass" class="text-black w-6 h-6"></i>
+        </div>
+        <span class="text-2xl font-bold text-gold font-serif tracking-tighter"
+          >AL-SAFAR</span
+        >
+      </div>
+      <div
+        class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80"
+      >
+        <a href="index.html" class="hover:text-gold transition-colors">Home</a>
+        <a href="hajj.html" class="hover:text-gold transition-colors"
+          >Hajj Packages</a
+        >
+        <a href="umrah.html" class="hover:text-gold transition-colors"
+          >Umrah Packages</a
+        >
+        <a href="#" class="text-gold">Premium Hotels</a>
+      </div>
+    </nav>
+
+    <section class="pt-40 pb-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 reveal">
+          <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">
+            Luxury Accommodations
+          </h1>
+          <p class="text-gray-400 max-w-3xl mx-auto mb-10 text-lg">
+            হারম শরীফের একদম কাছে আমাদের বাছাইকৃত সেরা হোটেলসমূহ।
+          </p>
+
+          <!-- Filter Buttons -->
+          <div class="flex justify-center gap-4 mb-12">
+            <button
+              onclick="filterHotels('all')"
+              class="hotel-filter active bg-gold text-black px-8 py-2 rounded-full text-xs font-bold tracking-widest"
+            >
+              ALL
+            </button>
+            <button
+              onclick="filterHotels('makkah')"
+              class="hotel-filter border border-gold/30 text-white px-8 py-2 rounded-full text-xs font-bold tracking-widest hover:bg-gold/10"
+            >
+              MAKKAH
+            </button>
+            <button
+              onclick="filterHotels('madinah')"
+              class="hotel-filter border border-gold/30 text-white px-8 py-2 rounded-full text-xs font-bold tracking-widest hover:bg-gold/10"
+            >
+              MADINAH
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="hotel-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- JS will render hotels here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Hotel Detail Modal -->
+    <div
+      id="hotel-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+    >
+      <div
+        class="absolute inset-0 bg-black/95 backdrop-blur-md"
+        onclick="closeHotelModal()"
+      ></div>
+      <div
+        class="relative bg-cardDark border border-white/10 w-full max-w-3xl rounded-[2.5rem] overflow-hidden shadow-2xl reveal active"
+      >
+        <button
+          onclick="closeHotelModal()"
+          class="absolute top-6 right-6 z-10 bg-black/50 p-2 rounded-full text-white hover:text-gold"
+        >
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div id="hotel-modal-content"></div>
+      </div>
+    </div>
+
+    <footer class="bg-black py-12 px-8 border-t border-white/5 text-center">
+      <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
+        AL-SAFAR
+      </div>
+      <p
+        class="text-gold/60 text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >
+        Owner: Tanzim Ahmed Utsho
+      </p>
+    </footer>
+
+    <style>
+      .hotel-filter.active {
+        background-color: #d4af37;
+        color: black;
+        border-color: #d4af37;
+      }
+    </style>
+  </body>
+</html>
