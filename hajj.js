@@ -164,7 +164,10 @@ function renderHajjDetailed() {
   container.innerHTML = hajjPackages
     .map(
       (pkg) => `
-    <div class="group bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
+    <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
+      <button onclick="toggleWishlist(this)" class="absolute top-8 right-8 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
+      </button>
       <div class="p-8 md:p-10">
         <div class="flex justify-between items-start mb-6">
           <div>

@@ -59,7 +59,10 @@ function renderPackages(containerId, filter = "all") {
   container.innerHTML = filtered
     .map(
       (pkg) => `
-    <div class="package-card ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
+    <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
+      <button onclick="toggleWishlist(this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
+      </button>
       ${pkg.highlight ? '<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-1 rounded-full font-bold text-[10px] uppercase tracking-widest">VIP Choice</div>' : ""}
       <h4 class="text-xl font-bold mb-2 ${pkg.highlight ? "text-white" : ""}">${pkg.name}</h4>
       <div class="text-3xl font-bold text-gold mb-6">${pkg.price}</div>
@@ -140,6 +143,15 @@ function closeSearchModal() {
   modal.classList.add("hidden");
   modal.classList.remove("flex");
   document.body.style.overflow = "auto";
+}
+
+function toggleWishlist(btn) {
+  const icon = btn.querySelector("svg");
+  if (!icon) return;
+  const isLiked = icon.classList.contains("fill-gold");
+  icon.classList.toggle("fill-gold", !isLiked);
+  icon.classList.toggle("text-gold", !isLiked);
+  icon.classList.toggle("text-gray-400", isLiked);
 }
 
 // Wishlist Modal Logic
