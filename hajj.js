@@ -152,15 +152,17 @@ const hajjPackages = [
   },
 ];
 
-const WISH_KEY = "alsafar_wishlist";
-const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
 let currentHajjFilter = "all";
+
+// Shared Logic
+const getHajjWishlist = () =>
+  JSON.parse(localStorage.getItem("alsafar_wishlist") || "[]");
 
 function renderHajjDetailed() {
   const container = document.getElementById("hajj-detailed-grid");
   if (!container) return;
 
-  const wishlist = getWishlist();
+  const wishlist = getHajjWishlist();
   let filtered =
     currentHajjFilter === "wishlist"
       ? hajjPackages.filter((p) => wishlist.includes("hajj_" + p.id))
@@ -222,19 +224,19 @@ function renderCardContent(pkg) {
 
 function clearHajjWishlist() {
   if (confirm("Clear all items from your hajj wishlist?")) {
-    let list = getWishlist();
+    let list = getHajjWishlist();
     list = list.filter((item) => !item.startsWith("hajj_"));
-    localStorage.setItem(WISH_KEY, JSON.stringify(list));
+    localStorage.setItem("alsafar_wishlist", JSON.stringify(list));
     renderHajjUI();
   }
 }
 
 function toggleHajjWishlist(id, btn) {
   const itemKey = "hajj_" + id;
-  let list = getWishlist();
+  let list = getHajjWishlist();
   if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
   else list.push(itemKey);
-  localStorage.setItem(WISH_KEY, JSON.stringify(list));
+  localStorage.setItem("alsafar_wishlist", JSON.stringify(list));
   renderHajjUI();
 }
 
@@ -318,7 +320,7 @@ function renderHajjUI() {
     ".flex.justify-center.gap-8.mb-12",
   );
   if (filterContainer) {
-    const wishlist = getWishlist();
+    const wishlist = getHajjWishlist();
     const hasWish = wishlist.some((item) => item.startsWith("hajj_"));
 
     filterContainer.innerHTML = `

@@ -24,6 +24,30 @@ const UI = {
     { name: "Why Us", url: "why-us.html" },
     { name: "Contact", url: "contact.html" },
   ],
+  features: [
+    {
+      icon: "hotel",
+      title: "Premium Hotels",
+      text: "Handpicked 5-star accommodations nearest to Haram.",
+      url: "hotels.html",
+    },
+    {
+      icon: "shield-check",
+      title: "VIP Assistance",
+      text: "24/7 dedicated local guides for every pilgrim group.",
+      url: null,
+    },
+    {
+      icon: "plane",
+      title: "Easy Booking",
+      text: "Seamless visa processing and flight arrangements.",
+      url: null,
+    },
+  ],
+  toggleMobileMenu() {
+    const navLinks = document.querySelector("#navbar .hidden.md\\:flex");
+    navLinks?.classList.toggle("hidden");
+  },
   renderNavbar() {
     const container = document.getElementById("navbar-container");
     if (!container) return;
@@ -41,7 +65,7 @@ const UI = {
         <div class="flex items-center space-x-6 text-white">
           <i data-lucide="search" id="navbar-search-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
           <i data-lucide="heart" id="navbar-wishlist-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
-          <button id="mobile-menu-btn" class="md:hidden text-gold"><i data-lucide="menu"></i></button>
+          <button onclick="UI.toggleMobileMenu()" id="mobile-menu-btn" class="md:hidden text-gold"><i data-lucide="menu"></i></button>
         </div>
       </nav>`;
   },
@@ -60,6 +84,51 @@ const UI = {
         </div>
         <div class="mt-8 text-[10px] text-gray-600 uppercase tracking-[0.3em]">© 2024 ${this.brand} Travel Agency. All Rights Reserved.</div>
       </footer>`;
+  },
+  renderFeatures() {
+    const container = document.getElementById("features-container");
+    if (!container) return;
+    container.innerHTML = `
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        ${this.features
+          .map(
+            (f) => `
+          <div class="text-center p-8 ${f.url ? "hover:bg-white/5 rounded-3xl transition-all duration-500 cursor-pointer" : ""}" onclick="${f.url ? `window.location.href='${f.url}'` : ""}">
+            <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="${f.icon}" class="text-gold w-8 h-8"></i>
+            </div>
+            <h5 class="text-xl font-bold mb-3">${f.title}</h5>
+            <p class="text-gray-500 text-sm leading-relaxed">${f.text}</p>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>`;
+  },
+  renderAssistance() {
+    const container = document.getElementById("assistance-container");
+    if (!container) return;
+    container.innerHTML = `
+      <section class="py-24 px-6 md:px-16 bg-white/5 backdrop-blur-sm border-y border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 islamic-pattern pointer-events-none opacity-[0.03]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10 reveal">
+          <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5">
+            <i data-lucide="hand-heart" class="text-gold w-10 h-10"></i>
+          </div>
+          <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">Everyone Deserves the Journey</h2>
+          <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-12">
+            আপনার স্বপ্ন পূরণে অর্থ যেন বাধা না হয়। আল-সফর-এ আমরা দিচ্ছি সহজ কিস্তি সুবিধা এবং বিশেষ ক্ষেত্রে আর্থিক সহায়তা।
+          </p>
+          <div class="flex flex-col md:flex-row justify-center gap-6">
+            <a href="contact.html" class="bg-gold hover:bg-white text-black px-12 py-5 rounded-full font-bold text-sm tracking-widest transition-all shadow-lg flex items-center justify-center gap-3">
+              <i data-lucide="info" class="w-4 h-4"></i> DISCUSS PAYMENT PLANS
+            </a>
+            <a href="support.html" class="border border-gold/30 text-gold hover:bg-gold/10 px-12 py-5 rounded-full font-bold text-sm tracking-widest transition-all flex items-center justify-center gap-3">
+              <i data-lucide="heart-handshake" class="w-4 h-4"></i> APPLY FOR SUPPORT
+            </a>
+          </div>
+        </div>
+      </section>`;
   },
   renderTopBar() {
     const container = document.getElementById("top-announcement-bar");
@@ -433,6 +502,8 @@ document.addEventListener("DOMContentLoaded", () => {
   UI.renderTopBar();
   UI.renderNavbar();
   UI.renderFooter();
+  UI.renderFeatures();
+  UI.renderAssistance();
   renderSearchBar();
   renderPackages("package-grid");
   lucide.createIcons();
