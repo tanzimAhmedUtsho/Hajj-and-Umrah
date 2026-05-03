@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hajj Packages | Al-Safar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="hajj.js" defer></script>
+    <style>
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-primaryDark text-gray-100 font-sans">
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 py-6 px-8 md:px-16 flex justify-between items-center bg-black/50 backdrop-blur-md"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 bg-gold rounded-full flex items-center justify-center"
+        >
+          <i data-lucide="compass" class="text-black w-6 h-6"></i>
+        </div>
+        <span class="text-2xl font-bold text-gold font-serif tracking-tighter"
+          >AL-SAFAR</span
+        >
+      </div>
+      <div
+        class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80"
+      >
+        <a href="index.html" class="hover:text-gold transition-colors">Home</a>
+        <a href="#" class="text-gold">Hajj Packages</a>
+        <a
+          href="index.html#umrah-packages"
+          class="hover:text-gold transition-colors"
+          >Umrah Packages</a
+        >
+        <a href="index.html#why-us" class="hover:text-gold transition-colors"
+          >Why Us</a
+        >
+        <a href="index.html#contact" class="hover:text-gold transition-colors"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
+    <section class="pt-40 pb-20 px-6">
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="reveal">
+          <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">
+            Sacred Hajj <span class="text-gold">2024-25</span>
+          </h1>
+          <p class="text-gray-400 max-w-3xl mx-auto mb-16 text-lg">
+            আপনার আধ্যাত্মিক যাত্রাকে স্মরণীয় ও আরামদায়ক করতে আমরা নিয়ে এসেছি বিশেষায়িত হজ প্যাকেজ। 
+            সেরা হোটেল, দক্ষ গাইড এবং নিরবচ্ছিন্ন সেবার নিশ্চয়তা।
+          </p>
+        </div>
+
+        <!-- Filter or Stats could go here -->
+        <div class="flex justify-center gap-8 mb-12 text-sm text-gold/80 font-bold uppercase tracking-widest reveal">
+          <span><i data-lucide="award" class="inline w-4 h-4 mr-2"></i> Ministry Approved</span>
+          <span><i data-lucide="shield-check" class="inline w-4 h-4 mr-2"></i> VIP Services</span>
+        </div>
+
+        <div
+          id="hajj-detailed-grid"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-10"
+        >
+          <!-- JS will render detailed Hajj packages here -->
+        </h1>
+      </div>
+    </section>
+
+    <footer class="bg-black py-12 px-8 border-t border-white/5 text-center">
+      <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
+        AL-SAFAR
+      </div>
+      <p
+        class="text-gold/60 text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >
+        Owner: Tanzim Ahmed Utsho
+      </p>
+    </footer>
+  </body>
+</html>

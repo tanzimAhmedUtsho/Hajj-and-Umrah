@@ -42,7 +42,7 @@
         class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80"
       >
         <a href="#" class="hover:text-gold transition-colors">Home</a>
-        <a href="#hajj-packages" class="hover:text-gold transition-colors"
+        <a href="hajj.html" class="hover:text-gold transition-colors"
           >Hajj Packages</a
         >
         <a href="#umrah-packages" class="hover:text-gold transition-colors"
@@ -162,104 +162,18 @@
     <!-- Packages Section -->
     <section id="packages" class="py-24 px-6 md:px-16">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16 reveal">
           <h2 class="text-4xl md:text-6xl font-serif font-bold mb-4">
             Our Special Packages
           </h2>
           <div class="w-20 h-1 bg-gold mx-auto mt-6"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Package 1 -->
-          <div
-            id="umrah-packages"
-            class="bg-white dark:bg-cardDark p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 hover:border-gold/50 transition-all duration-500"
-          >
-            <h4 class="text-xl font-bold mb-2">Umrah Standard</h4>
-            <div class="text-3xl font-bold text-gold mb-6">$1,299</div>
-            <ul class="space-y-4 mb-8 text-sm text-gray-500 dark:text-gray-400">
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> 4-Star
-                Hotel (Short Distance)
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> Visa &
-                Insurance Included
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> Local
-                Transportation
-              </li>
-            </ul>
-            <button
-              class="w-full py-4 rounded-2xl border border-gold text-gold font-bold hover:bg-gold hover:text-black transition-all"
-            >
-              BOOK NOW
-            </button>
-          </div>
-
-          <!-- Package 2 (Highlighted) -->
-          <div
-            id="hajj-packages"
-            class="bg-primaryDark p-8 rounded-[2rem] border-2 border-gold transform scale-105 shadow-2xl relative group"
-          >
-            <div
-              class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-1 rounded-full font-bold text-[10px] uppercase tracking-widest"
-            >
-              VIP Choice
-            </div>
-            <h4 class="text-xl font-bold mb-2 text-white">
-              Royal Hajj Premium
-            </h4>
-            <div class="text-3xl font-bold text-gold mb-6">$8,500</div>
-            <ul class="space-y-4 mb-8 text-sm text-gray-300">
-              <li class="flex items-center gap-3">
-                <i data-lucide="star" class="text-gold w-4 h-4"></i> 5-Star
-                Clock Tower Hotels
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="star" class="text-gold w-4 h-4"></i> Private VIP
-                Vehicle
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="star" class="text-gold w-4 h-4"></i> Premium
-                Mina Tents
-              </li>
-            </ul>
-            <button
-              class="w-full py-4 rounded-2xl bg-gold text-black font-bold hover:bg-white transition-all"
-            >
-              BOOK ROYAL JOURNEY
-            </button>
-          </div>
-
-          <!-- Package 3 -->
-          <div
-            class="bg-white dark:bg-cardDark p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 hover:border-gold/50 transition-all duration-500"
-          >
-            <h4 class="text-xl font-bold mb-2">Umrah Luxury</h4>
-            <div class="text-3xl font-bold text-gold mb-6">$2,800</div>
-            <ul class="space-y-4 mb-8 text-sm text-gray-500 dark:text-gray-400">
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> 5-Star
-                Hotel (Haram View)
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> Business
-                Class Travel
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="text-gold w-4 h-4"></i> Historical
-                Site Tours
-              </li>
-            </ul>
-            <button
-              class="w-full py-4 rounded-2xl border border-gold text-gold font-bold hover:bg-gold hover:text-black transition-all"
-            >
-              BOOK NOW
-            </button>
-          </div>
-        </div>
+        <!-- Dynamic Package Container -->
+        <div
+          id="package-grid"
+          class="grid grid-cols-1 md:grid-cols-3 gap-8"
+        ></div>
       </div>
     </section>
 
