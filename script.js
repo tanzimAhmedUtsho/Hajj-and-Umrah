@@ -123,12 +123,50 @@ function closeBookingModal() {
   document.body.style.overflow = "auto";
 }
 
+// Search Modal Logic
+function openSearchModal() {
+  const modal = document.getElementById("search-modal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => {
+    document.getElementById("search-input")?.focus();
+  }, 100);
+  lucide.createIcons();
+}
+
+function closeSearchModal() {
+  const modal = document.getElementById("search-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  document.body.style.overflow = "auto";
+}
+
 // Initialize everything on DOM load
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
   renderPackages("package-grid");
   if (document.getElementById("hajj-only-grid")) {
     renderPackages("hajj-only-grid", "hajj");
+  }
+
+  // Search Listeners
+  const searchBtn = document.getElementById("navbar-search-btn");
+  if (searchBtn) searchBtn.addEventListener("click", openSearchModal);
+
+  const mainSearchBtn = document.getElementById("main-search-btn");
+  if (mainSearchBtn) {
+    mainSearchBtn.addEventListener("click", () => {
+      mainSearchBtn.innerHTML =
+        '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> SEARCHING...';
+      lucide.createIcons();
+      setTimeout(() => {
+        mainSearchBtn.innerHTML =
+          '<i data-lucide="search" class="w-4 h-4"></i> SEARCH';
+        lucide.createIcons();
+        alert("Showing customized packages for your criteria...");
+      }, 1500);
+    });
   }
 });
 
