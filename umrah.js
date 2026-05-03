@@ -160,8 +160,7 @@ function renderUmrahDetailed() {
   container.innerHTML = filtered
     .map(
       (pkg) => `
-    <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
-      <button onclick="toggleUmrahWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+    <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 ll group/heart z-10">
         <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`umrah_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       <div class="p-8 md:p-10">

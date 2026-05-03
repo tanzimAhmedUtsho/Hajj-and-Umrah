@@ -278,7 +278,7 @@ function renderPackagesWithData(containerId, data) {
     container.innerHTML = data
       .map(
         (pkg) => `
-    <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
+    <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 hover:bg-white/5 hover:backdrop-blur-md hover:shadow-[0_20px_50px_rgba(212,175,55,0.1)] reveal">
       <button onclick="handleToggleWishlist(${pkg.id}, '${pkg.type}', this)" class="absolute top-5 right-5 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
         <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`${pkg.type}_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
