@@ -156,21 +156,40 @@ const hajjPackages = [
   },
 ];
 
-eeeion renderHajjDetailed() {
+// Shared Logic for State Management
+const WISH_KEY = "alsafar_wishlist";
+const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+let currentHajjFilter = "all";
+
+function renderHajjDetailed() {
   const container = document.getElementById("hajj-detailed-grid");
   if (!container) return;
 
-  const wishlist = JSON.parse(localStorage.getItem("alsafar_wishlist") || "[]");
-  let filtered =    currentHajjFilter === "wishlist"
-> wishlist.includes(`hajj_${p.id}`))
+  const wishlist = getWishlist();
+  let filtered =
+    currentHajjFilter === "wishlist"
+      ? hajjPackages.filter((p) => wishlist.includes(`hajj_${p.id}`))
       : hajjPackages;
-  
+
   // Max JS Logic for Empty State
-  if (filtered.length === 0) return container.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No packages found.</div>`;
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500 italic">No packages found in this category.</div>`;
+    return;
+  }
 
   container.innerHTML = filtered
     .map(
-      (pkg) => `ol     <i data-lucide="hea</button> p-8 md:p-10">rCardContent(pkg)}<div> )
+      (pkg) => `
+    <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 reveal">
+      <button onclick="toggleHajjWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`hajj_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
+      </button>
+      <div class="p-8 md:p-10">
+        ${renderCardContent(pkg)}
+      </div>
+    </div>
+  `,
+    )
     .join("");
 
   lucide.createIcons();
