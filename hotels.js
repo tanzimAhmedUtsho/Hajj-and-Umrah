@@ -1,3 +1,21 @@
+// Tailwind Configuration for Hotels Page
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        gold: "#D4AF37",
+        primaryDark: "#0a0a0a",
+        cardDark: "#111111",
+      },
+      fontFamily: {
+        serif: ["Playfair Display", "serif"],
+        sans: ["Inter", "sans-serif"],
+      },
+    },
+  },
+};
+
 const hotelData = [
   {
     id: 1,
