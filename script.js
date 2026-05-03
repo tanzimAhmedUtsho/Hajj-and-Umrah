@@ -365,13 +365,6 @@ function closeSearchModal() {
   document.body.style.overflow = "auto";
 }
 
-function handleToggleWishlist(id, type, btn) {
-  const isLiked = Wishlist.toggle(id, type);
-  const icon = btn.querySelector("svg");
-  if (!icon) return;
-  renderPackages("package-grid"); // Efficient re-render
-}
-
 function handleFilter(type, btn) {
   document.querySelectorAll(".filter-btn").forEach((b) => {
     b.classList.remove("active", "bg-gold", "text-black");
@@ -380,6 +373,47 @@ function handleFilter(type, btn) {
   btn.classList.add("active", "bg-gold", "text-black");
   btn.classList.remove("border", "border-gold/30", "text-white");
   renderPackages("package-grid", type);
+
+  // Manage Remove All Button
+  const existingClear = document.getElementById("clear-all-wish-main");
+  if (type === "wishlist" && Wishlist.get().length > 0) {
+    if (!existingClear) {
+      const clearBtn = document.createElement("button");
+      clearBtn.id = "clear-all-wish-main";
+      clearBtn.className =
+        "mt-8 mx-auto block text-red-500 text-[10px] font-bold uppercase tracking-widest hover:text-white transition-colors reveal active";
+      clearBtn.innerHTML = "Remove All From Wishlist";
+      clearBtn.onclick = () => {
+        if (confirm("Clear all items from your wishlist?")) {
+          localStorage.removeItem(WISH_KEY);
+          handleFilter("wishlist", btn);
+        }
+      };
+      document
+        .getElementById("packages")
+        .querySelector(".max-w-7xl")
+        .insertBefore(clearBtn, document.getElementById("package-grid"));
+    }
+  } else if (existingClear) {
+    existingClear.remove();
+  }
+}
+
+function handleToggleWishlist(id, type, btn) {
+  const isLiked = Wishlist.toggle(id, type);
+  const activeBtn = document.querySelector(".filter-btn.active");
+
+  if (activeBtn && activeBtn.innerText.includes("WISHLIST")) {
+    handleFilter("wishlist", activeBtn);
+  } else {
+    const icon = btn.querySelector("svg");
+    if (icon) {
+      icon.classList.toggle("fill-gold", isLiked);
+      icon.classList.toggle("text-gold", isLiked);
+      icon.classList.toggle("text-gray-400", !isLiked);
+    }
+  }
+  lucide.createIcons();
 }
 
 // Wishlist Modal Logic

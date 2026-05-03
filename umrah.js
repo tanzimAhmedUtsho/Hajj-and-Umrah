@@ -234,22 +234,36 @@ function showUmrahItinerary(id) {
   lucide.createIcons();
 }
 
+function clearUmrahWishlist() {
+  if (confirm("Clear your Umrah wishlist?")) {
+    let list = getWishlist();
+    list = list.filter((i) => !i.startsWith("umrah_"));
+    localStorage.setItem(WISH_KEY, JSON.stringify(list));
+    initUmrahUI();
+  }
+}
+
 function toggleUmrahWishlist(id, btn) {
   const itemKey = `umrah_${id}`;
   let list = getWishlist();
   if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
   else list.push(itemKey);
   localStorage.setItem(WISH_KEY, JSON.stringify(list));
-  renderUmrahDetailed();
+  initUmrahUI();
 }
 
 function initUmrahUI() {
   const filterArea = document.querySelector(".flex.justify-center.gap-8.mb-12");
   if (filterArea) {
+    const wishlist = getWishlist();
+    const hasWish = wishlist.some((i) => i.startsWith("umrah_"));
+
     filterArea.innerHTML = `
             <button onclick="setUmrahFilter('all')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase hover:bg-gold hover:text-black transition-all">All</button>
             <button onclick="setUmrahFilter('wishlist')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase hover:bg-gold hover:text-black transition-all">My Wishlist</button>
+            ${hasWish ? `<button onclick="clearUmrahWishlist()" class="px-6 py-2 rounded-full border border-red-500/20 text-red-500 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition-all">Remove All</button>` : ""}
         `;
+    lucide.createIcons();
   }
   renderUmrahDetailed();
 }

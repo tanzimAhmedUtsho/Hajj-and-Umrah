@@ -208,13 +208,22 @@ function renderCardContent(pkg) {
     `;
 }
 
+function clearHajjWishlist() {
+  if (confirm("Clear all items from your hajj wishlist?")) {
+    let list = getWishlist();
+    list = list.filter((item) => !item.startsWith("hajj_"));
+    localStorage.setItem(WISH_KEY, JSON.stringify(list));
+    renderHajjUI();
+  }
+}
+
 function toggleHajjWishlist(id, btn) {
   const itemKey = `hajj_${id}`;
   let list = getWishlist();
   if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
   else list.push(itemKey);
   localStorage.setItem(WISH_KEY, JSON.stringify(list));
-  renderHajjDetailed(); // Re-render to update state correctly
+  renderHajjUI();
 }
 
 function renderDetailsGrid(pkg) {
@@ -297,12 +306,17 @@ function renderHajjUI() {
     ".flex.justify-center.gap-8.mb-12",
   );
   if (filterContainer) {
+    const wishlist = getWishlist();
+    const hasWish = wishlist.some((item) => item.startsWith("hajj_"));
+
     filterContainer.innerHTML = `
             <button onclick="setHajjFilter('all')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all">All Packages</button>
             <button onclick="setHajjFilter('wishlist')" class="px-6 py-2 rounded-full border border-gold/30 text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all flex items-center gap-2">
                 <i data-lucide="heart" class="w-3 h-3"></i> My Wishlist
             </button>
+            ${hasWish ? `<button onclick="clearHajjWishlist()" class="px-6 py-2 rounded-full border border-red-500/20 text-[10px] text-red-500 uppercase font-bold tracking-widest hover:bg-red-500 hover:text-white transition-all">Remove All</button>` : ""}
         `;
+    lucide.createIcons();
   }
   renderHajjDetailed();
 }
