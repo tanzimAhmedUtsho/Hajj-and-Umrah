@@ -74,7 +74,7 @@ function renderPackages(containerId, filter = "all") {
           )
           .join("")}
       </ul>
-      <button class="w-full py-4 rounded-2xl ${pkg.highlight ? "bg-gold text-black" : "border border-gold text-gold"} font-bold hover:bg-white hover:text-black transition-all">
+      <button onclick="bookDirect(${pkg.id})" class="w-full py-4 rounded-2xl ${pkg.highlight ? "bg-gold text-black" : "border border-gold text-gold"} font-bold hover:bg-white hover:text-black transition-all">
         ${pkg.highlight ? "BOOK ROYAL JOURNEY" : "BOOK NOW"}
       </button>
     </div>
@@ -84,6 +84,14 @@ function renderPackages(containerId, filter = "all") {
 
   lucide.createIcons();
   observeReveal();
+}
+
+function bookDirect(id) {
+  const pkg = packages.find((p) => p.id === id);
+  alert(
+    `Assalamu Alaikum! You have selected the ${pkg.name}. Our team will contact you soon for the booking process.`,
+  );
+  window.location.href = "#contact";
 }
 
 // Initialize everything on DOM load

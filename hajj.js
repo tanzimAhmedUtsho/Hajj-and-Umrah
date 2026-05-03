@@ -264,13 +264,30 @@ function showItinerary(id) {
 
     <div class="p-6 bg-white/5 rounded-2xl border border-white/5 text-center">
       <p class="text-gray-400 text-xs mb-4 italic">Ready to start your spiritual journey?</p>
-      <button class="bg-gold text-black font-bold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-white transition-all">BOOK THIS PACKAGE</button>
+      <button onclick="bookPackage(${pkg.id})" class="bg-gold text-black font-bold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-white transition-all">BOOK THIS PACKAGE</button>
     </div>
   `;
 
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   document.body.style.overflow = "hidden";
+  lucide.createIcons();
+}
+
+function bookPackage(id) {
+  const pkg = hajjPackages.find((p) => p.id === id);
+  const content = document.getElementById("modal-content");
+
+  content.innerHTML = `
+    <div class="text-center py-16 reveal active">
+      <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-8">
+        <i data-lucide="check-circle" class="text-gold w-10 h-10"></i>
+      </div>
+      <h2 class="text-4xl font-serif font-bold text-white mb-4">Request Received</h2>
+      <p class="text-gray-400 max-w-md mx-auto mb-10 leading-relaxed">Assalamu Alaikum! Thank you for choosing the <span class="text-gold font-bold">${pkg.name}</span>. Our dedicated spiritual travel consultant will contact you shortly to finalize the details.</p>
+      <button onclick="closeModal()" class="border border-gold text-gold px-12 py-4 rounded-full text-xs tracking-widest hover:bg-gold hover:text-black transition-all uppercase font-bold">Close Window</button>
+    </div>
+  `;
   lucide.createIcons();
 }
 
