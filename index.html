@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al-Safar | Hajj & Umrah Agency</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- External Resources -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS and JS Links -->
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body
+    class="bg-white dark:bg-primaryDark text-slate-900 dark:text-gray-100 font-sans custom-scrollbar"
+  >
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 transition-all duration-500 py-6 px-8 md:px-16 flex justify-between items-center"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 bg-gold rounded-full flex items-center justify-center"
+        >
+          <i data-lucide="compass" class="text-black w-6 h-6"></i>
+        </div>
+        <span class="text-2xl font-bold text-gold font-serif tracking-tighter"
+          >AL-SAFAR</span
+        >
+      </div>
+
+      <div
+        class="hidden md:flex space-x-10 text-xs font-bold uppercase tracking-widest text-white/80"
+      >
+        <a href="#" class="hover:text-gold transition-colors">Home</a>
+        <a href="#packages" class="hover:text-gold transition-colors"
+          >Packages</a
+        >
+        <a href="#why-us" class="hover:text-gold transition-colors">Why Us</a>
+        <a href="#contact" class="hover:text-gold transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-6 text-white">
+        <i
+          data-lucide="search"
+          class="w-5 h-5 cursor-pointer hover:text-gold"
+        ></i>
+        <i
+          data-lucide="heart"
+          class="w-5 h-5 cursor-pointer hover:text-gold"
+        ></i>
+        <button id="mobile-menu-btn" class="md:hidden text-gold">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=2070&auto=format&fit=crop"
+          alt="Holy Kaaba"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 hero-overlay"></div>
+      </div>
+
+      <div class="relative z-10 text-center px-6">
+        <h1
+          class="text-6xl md:text-9xl font-serif font-black text-white mb-6 leading-none"
+        >
+          HAJJ <span class="text-gold">&</span> UMRAH
+        </h1>
+        <p
+          class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light italic"
+        >
+          Experience the journey of a lifetime with our premium and spiritual
+          guidance.
+        </p>
+        <a
+          href="#packages"
+          class="bg-gold hover:bg-white text-black px-10 py-4 rounded-full font-bold text-sm tracking-widest transition-all duration-300 transform hover:scale-105 shadow-xl"
+        >
+          EXPLORE PACKAGES
+        </a>
+      </div>
+    </section>
+
+    <!-- Floating Search Bar -->
+    <div class="relative z-20 -mt-12 max-w-6xl mx-auto px-4">
+      <div
+        class="bg-white dark:bg-cardDark p-8 rounded-2xl shadow-2xl border border-white/5 backdrop-blur-md"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="space-y-2">
+            <label
+              class="text-[10px] font-bold text-gold uppercase tracking-widest"
+              >Flight Date</label
+            >
+            <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+              <i data-lucide="calendar" class="w-4 h-4 text-gray-400"></i>
+              <input
+                type="text"
+                placeholder="Nov 2024"
+                class="bg-transparent outline-none w-full text-sm"
+              />
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label
+              class="text-[10px] font-bold text-gold uppercase tracking-widest"
+              >Haram Distance</label
+            >
+            <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-gray-400"></i>
+              <select
+                class="bg-transparent outline-none w-full text-sm appearance-none cursor-pointer"
+              >
+                <option class="bg-black">Under 500m</option>
+                <option class="bg-black">Walking Distance</option>
+              </select>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label
+              class="text-[10px] font-bold text-gold uppercase tracking-widest"
+              >Price Range</label
+            >
+            <div class="flex items-center gap-3 border-b border-gray-700 pb-2">
+              <i data-lucide="wallet" class="w-4 h-4 text-gray-400"></i>
+              <input
+                type="text"
+                placeholder="$1000 - $5000"
+                class="bg-transparent outline-none w-full text-sm"
+              />
+            </div>
+          </div>
+          <button
+            class="bg-gold hover:bg-white text-black font-bold rounded-xl py-3 transition-all flex items-center justify-center gap-2"
+          >
+            <i data-lucide="search" class="w-4 h-4"></i> SEARCH
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-24 px-6 md:px-16">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-6xl font-serif font-bold mb-4">
+            Our Special Packages
+          </h2>
+          <div class="w-20 h-1 bg-gold mx-auto mt-6"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Package 1 -->
+          <div
+            class="bg-white dark:bg-cardDark p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 hover:border-gold/50 transition-all duration-500"
+          >
+            <h4 class="text-xl font-bold mb-2">Umrah Standard</h4>
+            <div class="text-3xl font-bold text-gold mb-6">$1,299</div>
+            <ul class="space-y-4 mb-8 text-sm text-gray-500 dark:text-gray-400">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> 4-Star
+                Hotel (Short Distance)
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> Visa &
+                Insurance Included
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> Local
+                Transportation
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 rounded-2xl border border-gold text-gold font-bold hover:bg-gold hover:text-black transition-all"
+            >
+              BOOK NOW
+            </button>
+          </div>
+
+          <!-- Package 2 (Highlighted) -->
+          <div
+            class="bg-primaryDark p-8 rounded-[2rem] border-2 border-gold transform scale-105 shadow-2xl relative group"
+          >
+            <div
+              class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-1 rounded-full font-bold text-[10px] uppercase tracking-widest"
+            >
+              VIP Choice
+            </div>
+            <h4 class="text-xl font-bold mb-2 text-white">
+              Royal Hajj Premium
+            </h4>
+            <div class="text-3xl font-bold text-gold mb-6">$8,500</div>
+            <ul class="space-y-4 mb-8 text-sm text-gray-300">
+              <li class="flex items-center gap-3">
+                <i data-lucide="star" class="text-gold w-4 h-4"></i> 5-Star
+                Clock Tower Hotels
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="star" class="text-gold w-4 h-4"></i> Private VIP
+                Vehicle
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="star" class="text-gold w-4 h-4"></i> Premium
+                Mina Tents
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 rounded-2xl bg-gold text-black font-bold hover:bg-white transition-all"
+            >
+              BOOK ROYAL JOURNEY
+            </button>
+          </div>
+
+          <!-- Package 3 -->
+          <div
+            class="bg-white dark:bg-cardDark p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 hover:border-gold/50 transition-all duration-500"
+          >
+            <h4 class="text-xl font-bold mb-2">Umrah Luxury</h4>
+            <div class="text-3xl font-bold text-gold mb-6">$2,800</div>
+            <ul class="space-y-4 mb-8 text-sm text-gray-500 dark:text-gray-400">
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> 5-Star
+                Hotel (Haram View)
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> Business
+                Class Travel
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="check" class="text-gold w-4 h-4"></i> Historical
+                Site Tours
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 rounded-2xl border border-gold text-gold font-bold hover:bg-gold hover:text-black transition-all"
+            >
+              BOOK NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="why-us" class="py-24 bg-gray-50 dark:bg-[#080808] px-6">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="text-center p-8">
+          <div
+            class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          >
+            <i data-lucide="hotel" class="text-gold w-8 h-8"></i>
+          </div>
+          <h5 class="text-xl font-bold mb-3">Premium Hotels</h5>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            We select only the finest accommodations with the closest proximity
+            to the Haram.
+          </p>
+        </div>
+        <div class="text-center p-8">
+          <div
+            class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          >
+            <i data-lucide="shield-check" class="text-gold w-8 h-8"></i>
+          </div>
+          <h5 class="text-xl font-bold mb-3">VIP Assistance</h5>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Our dedicated guides are available 24/7 to ensure your peace and
+            spiritual focus.
+          </p>
+        </div>
+        <div class="text-center p-8">
+          <div
+            class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          >
+            <i data-lucide="plane" class="text-gold w-8 h-8"></i>
+          </div>
+          <h5 class="text-xl font-bold mb-3">Easy Booking</h5>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Hassle-free visa processing and quick flight arrangements for all
+            pilgrims.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-primaryDark py-12 px-8 border-t border-white/5 text-center"
+    >
+      <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
+        AL-SAFAR
+      </div>
+      <p class="text-gray-500 text-sm mb-6">
+        Your spiritual journey is our responsibility.
+      </p>
+      <p
+        class="text-gold/60 text-[10px] uppercase tracking-[0.2em] mb-6 font-semibold"
+      >
+        Owner: Tanzim Ahmed Utsho
+      </p>
+      <div class="flex justify-center space-x-6 text-gray-400">
+        <i
+          data-lucide="instagram"
+          class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"
+        ></i>
+        <i
+          data-lucide="facebook"
+          class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"
+        ></i>
+        <i
+          data-lucide="twitter"
+          class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"
+        ></i>
+      </div>
+      <div class="mt-8 text-[10px] text-gray-600 uppercase tracking-[0.3em]">
+        © 2024 Al-Safar Travel Agency. All Rights Reserved.
+      </div>
+    </footer>
+  </body>
+</html>

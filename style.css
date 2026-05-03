@@ -1,0 +1,18 @@
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(10, 10, 10, 1) 100%
+  );
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 10px;
+}
