@@ -25,6 +25,7 @@ const packages = [
     price: "$1,299",
     features: ["4-Star Hotel", "Visa & Insurance", "Local Transport"],
     highlight: false,
+    inWishlist: false,
   },
   {
     id: 2,
@@ -37,6 +38,7 @@ const packages = [
       "Premium Mina Tents",
     ],
     highlight: true,
+    inWishlist: false,
   },
   {
     id: 3,
@@ -45,6 +47,7 @@ const packages = [
     price: "$2,800",
     features: ["5-Star Haram View", "Business Class", "Historical Tours"],
     highlight: false,
+    inWishlist: false,
   },
 ];
 
@@ -53,15 +56,31 @@ function renderPackages(containerId, filter = "all") {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const filtered =
-    filter === "all" ? packages : packages.filter((p) => p.type === filter);
+  let filtered;
+  if (filter === "wishlist") {
+    filtered = packages.filter((p) => p.inWishlist);
+  } else {
+    filtered =
+      filter === "all" ? packages : packages.filter((p) => p.type === filter);
+  }
 
-  container.innerHTML = filtered
-    .map(
-      (pkg) => `
+  if (filtered.length === 0 && filter === "wishlist") {
+    container.innerHTML = `
+      <div class="col-span-full py-20 text-center reveal active">
+        <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <i data-lucide="heart-off" class="text-gold w-10 h-10"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Wishlist is Empty</h3>
+        <p class="text-gray-500">You haven't added any packages to your wishlist yet.</p>
+      </div>
+    `;
+  } else {
+    container.innerHTML = filtered
+      .map(
+        (pkg) => `
     <div class="package-card relative ${pkg.highlight ? "bg-primaryDark border-2 border-gold scale-105 shadow-2xl" : "bg-cardDark border border-white/5"} p-8 rounded-[2rem] transition-all duration-500 reveal">
-      <button onclick="toggleWishlist(this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 text-gray-400 group-hover/heart:text-gold transition-colors"></i>
+      <button onclick="toggleWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
+        <i data-lucide="heart" class="w-4 h-4 ${pkg.inWishlist ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       ${pkg.highlight ? '<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-1 rounded-full font-bold text-[10px] uppercase tracking-widest">VIP Choice</div>' : ""}
       <h4 class="text-xl font-bold mb-2 ${pkg.highlight ? "text-white" : ""}">${pkg.name}</h4>
@@ -82,8 +101,9 @@ function renderPackages(containerId, filter = "all") {
       </button>
     </div>
   `,
-    )
-    .join("");
+      )
+      .join("");
+  }
 
   lucide.createIcons();
   observeReveal();
@@ -145,13 +165,27 @@ function closeSearchModal() {
   document.body.style.overflow = "auto";
 }
 
-function toggleWishlist(btn) {
+function toggleWishlist(id, btn) {
+  const pkg = packages.find((p) => p.id === id);
+  if (!pkg) return;
+
+  pkg.inWishlist = !pkg.inWishlist;
   const icon = btn.querySelector("svg");
   if (!icon) return;
-  const isLiked = icon.classList.contains("fill-gold");
-  icon.classList.toggle("fill-gold", !isLiked);
-  icon.classList.toggle("text-gold", !isLiked);
-  icon.classList.toggle("text-gray-400", isLiked);
+
+  icon.classList.toggle("fill-gold", pkg.inWishlist);
+  icon.classList.toggle("text-gold", pkg.inWishlist);
+  icon.classList.toggle("text-gray-400", !pkg.inWishlist);
+}
+
+function handleFilter(type, btn) {
+  document.querySelectorAll(".filter-btn").forEach((b) => {
+    b.classList.remove("active", "bg-gold", "text-black");
+    b.classList.add("border", "border-gold/30", "text-white");
+  });
+  btn.classList.add("active", "bg-gold", "text-black");
+  btn.classList.remove("border", "border-gold/30", "text-white");
+  renderPackages("package-grid", type);
 }
 
 // Wishlist Modal Logic
