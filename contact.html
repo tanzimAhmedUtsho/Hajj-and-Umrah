@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Al-Safar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="contact.js" defer></script>
+    <style>
+      .islamic-pattern {
+        background-image: url("https://www.transparenttextures.com/patterns/islamic-art.png");
+        opacity: 0.05;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-primaryDark text-gray-100 font-sans overflow-x-hidden">
+    <div class="fixed inset-0 islamic-pattern pointer-events-none"></div>
+
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 transition-all duration-500 py-6 px-8 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 bg-gold rounded-full flex items-center justify-center"
+        >
+          <i data-lucide="compass" class="text-black w-6 h-6"></i>
+        </div>
+        <span class="text-2xl font-bold text-gold font-serif tracking-tighter"
+          >AL-SAFAR</span
+        >
+      </div>
+      <div
+        class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80"
+      >
+        <a href="index.html" class="hover:text-gold transition-colors">Home</a>
+        <a href="hajj.html" class="hover:text-gold transition-colors"
+          >Hajj Packages</a
+        >
+        <a href="umrah.html" class="hover:text-gold transition-colors"
+          >Umrah Packages</a
+        >
+        <a href="hotels.html" class="hover:text-gold transition-colors"
+          >Premium Hotels</a
+        >
+        <a href="#" class="text-gold">Contact</a>
+      </div>
+    </nav>
+
+    <section class="pt-40 pb-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+          <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">
+            Connect With Us
+          </h1>
+          <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+            Your journey to the Holy Land starts with a conversation. We are
+            here to guide you every step of the way.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <!-- Left Side: Contact Info -->
+          <div class="space-y-12 reveal">
+            <div class="space-y-8">
+              <div class="flex items-start gap-6 group">
+                <div
+                  class="w-14 h-14 bg-gold/10 rounded-2xl flex items-center justify-center shrink-0 border border-gold/20 group-hover:bg-gold group-hover:text-black transition-all duration-500"
+                >
+                  <i
+                    data-lucide="map-pin"
+                    class="w-6 h-6 text-gold group-hover:text-black"
+                  ></i>
+                </div>
+                <div>
+                  <h4
+                    class="text-gold font-bold uppercase tracking-widest text-xs mb-2"
+                  >
+                    Our Office
+                  </h4>
+                  <p class="text-gray-300 text-lg">
+                    123 Spiritual Way, Gulshan 1<br />Dhaka, Bangladesh
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-6 group">
+                <div
+                  class="w-14 h-14 bg-gold/10 rounded-2xl flex items-center justify-center shrink-0 border border-gold/20 group-hover:bg-gold group-hover:text-black transition-all duration-500"
+                >
+                  <i
+                    data-lucide="phone"
+                    class="w-6 h-6 text-gold group-hover:text-black"
+                  ></i>
+                </div>
+                <div>
+                  <h4
+                    class="text-gold font-bold uppercase tracking-widest text-xs mb-2"
+                  >
+                    Call/WhatsApp
+                  </h4>
+                  <p class="text-gray-300 text-lg">+880 1712-345678</p>
+                  <a
+                    href="https://wa.me/8801712345678"
+                    target="_blank"
+                    class="text-gold hover:text-white text-xs font-bold flex items-center gap-2 mt-2 transition-colors"
+                  >
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> CHAT ON
+                    WHATSAPP
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-start gap-6 group">
+                <div
+                  class="w-14 h-14 bg-gold/10 rounded-2xl flex items-center justify-center shrink-0 border border-gold/20 group-hover:bg-gold group-hover:text-black transition-all duration-500"
+                >
+                  <i
+                    data-lucide="mail"
+                    class="w-6 h-6 text-gold group-hover:text-black"
+                  ></i>
+                </div>
+                <div>
+                  <h4
+                    class="text-gold font-bold uppercase tracking-widest text-xs mb-2"
+                  >
+                    Email Address
+                  </h4>
+                  <p class="text-gray-300 text-lg">info@al-safar.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5">
+              <h4 class="text-white font-bold mb-6">
+                Follow Tanzim Ahmed Utsho
+              </h4>
+              <div class="flex gap-4">
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-gold hover:text-black transition-all duration-300"
+                  ><i data-lucide="facebook" class="w-5 h-5"></i
+                ></a>
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-gold hover:text-black transition-all duration-300"
+                  ><i data-lucide="instagram" class="w-5 h-5"></i
+                ></a>
+                <a
+                  href="#"
+                  class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-gold hover:text-black transition-all duration-300"
+                  ><i data-lucide="twitter" class="w-5 h-5"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Form -->
+          <div
+            class="bg-cardDark border border-white/5 p-8 md:p-12 rounded-[2.5rem] shadow-2xl reveal"
+          >
+            <form id="contact-form" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Your Name"
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="+880..."
+                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="email@example.com"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Package Interest</label
+                >
+                <select
+                  id="package"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm appearance-none cursor-pointer"
+                >
+                  <option class="bg-primaryDark">Hajj Premium</option>
+                  <option class="bg-primaryDark">Umrah Comfort</option>
+                  <option class="bg-primaryDark">Premium Hotels Only</option>
+                </select>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="text-[10px] text-gold font-bold uppercase tracking-widest"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  placeholder="How can we assist you?"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-gold transition-all text-sm resize-none"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full py-5 rounded-2xl bg-gold text-black font-black tracking-[0.2em] text-xs hover:bg-white hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-500 uppercase"
+              >
+                Submit Inquiry
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Map Section -->
+        <div
+          class="mt-24 rounded-[3rem] overflow-hidden border border-white/5 h-[450px] reveal"
+        >
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.1557025816995!2d90.4144463760451!3d23.77747688775439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7772718712f%3A0x63345862086c67b0!2sGulshan%201%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1715600000000!5m2!1sen!2sbd"
+            width="100%"
+            height="100%"
+            style="border: 0; filter: grayscale(1) invert(0.9) contrast(1.2)"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <div
+      id="toast"
+      class="fixed bottom-10 right-10 z-[100] translate-y-20 opacity-0 transition-all duration-500"
+    >
+      <div
+        class="bg-gold text-black px-8 py-4 rounded-2xl font-bold shadow-2xl flex items-center gap-3"
+      >
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        Message sent successfully!
+      </div>
+    </div>
+
+    <footer class="bg-black py-12 px-8 border-t border-white/5 text-center">
+      <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
+        AL-SAFAR
+      </div>
+      <p
+        class="text-gold/60 text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >
+        Owner: Tanzim Ahmed Utsho
+      </p>
+    </footer>
+  </body>
+</html>
