@@ -8,10 +8,6 @@ tailwind.config = {
         primaryDark: "#0a0a0a",
         cardDark: "#111111",
       },
-      fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        sans: ["Inter", "sans-serif"],
-      },
     },
   },
 };
@@ -167,7 +163,7 @@ function renderHajjDetailed() {
   const wishlist = getWishlist();
   let filtered =
     currentHajjFilter === "wishlist"
-      ? hajjPackages.filter((p) => wishlist.includes(`hajj_${p.id}`))
+      ? hajjPackages.filter((p) => wishlist.includes("hajj_" + p.id))
       : hajjPackages;
 
   if (filtered.length === 0) {
@@ -180,7 +176,7 @@ function renderHajjDetailed() {
       (pkg) => `
     <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 hover:bg-white/5 hover:backdrop-blur-md reveal">
       <button onclick="toggleHajjWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`hajj_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes("hajj_" + pkg.id) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       <div class="p-8 md:p-10">
         ${renderCardContent(pkg)}
@@ -198,7 +194,7 @@ function renderCardContent(pkg) {
         <div class="flex justify-between items-start mb-6">
             <div>
                 <span class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] bg-gold/10 px-3 py-1 rounded-full mb-3 inline-block">${pkg.tag}</span>
-                <h3 class="text-2xl md:text-3xl font-serif font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
+                <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
             </div>
             <div class="text-right pt-4">
                 <div class="text-3xl font-bold text-gold">${pkg.price}</div>
@@ -234,7 +230,7 @@ function clearHajjWishlist() {
 }
 
 function toggleHajjWishlist(id, btn) {
-  const itemKey = `hajj_${id}`;
+  const itemKey = "hajj_" + id;
   let list = getWishlist();
   if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
   else list.push(itemKey);
@@ -288,7 +284,7 @@ function showItinerary(id) {
   const content = document.getElementById("modal-content");
 
   content.innerHTML = `
-    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">${pkg.name}</h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">${pkg.name}</h2>
     <p class="text-gold font-bold mb-8 tracking-widest uppercase text-xs">${pkg.duration} Complete Journey Plan</p>
     
     <div class="space-y-8 mb-10">
@@ -351,7 +347,7 @@ function bookPackage(id) {
       <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
         <i data-lucide="scroll" class="text-gold w-10 h-10"></i>
       </div>
-      <h2 class="text-4xl font-serif font-bold text-white mb-4">Booking Requested</h2>
+      <h2 class="text-4xl font-bold text-white mb-4">Booking Requested</h2>
       <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Sacred Hajj Journey</p>
       <p class="text-gray-400 leading-relaxed mb-10 text-sm">
         Assalamu Alaikum! You've expressed interest in <span class="text-gold font-bold">${pkg.name}</span>. 

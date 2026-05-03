@@ -8,10 +8,6 @@ tailwind.config = {
         primaryDark: "#0a0a0a",
         cardDark: "#111111",
       },
-      fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        sans: ["Inter", "sans-serif"],
-      },
     },
   },
 };
@@ -149,7 +145,7 @@ function renderUmrahDetailed() {
   const wishlist = getWishlist();
   let filtered =
     currentUmrahFilter === "wishlist"
-      ? umrahPackages.filter((p) => wishlist.includes(`umrah_${p.id}`))
+      ? umrahPackages.filter((p) => wishlist.includes("umrah_" + p.id))
       : umrahPackages;
 
   if (filtered.length === 0) {
@@ -162,13 +158,13 @@ function renderUmrahDetailed() {
       (pkg) => `
     <div class="group relative bg-cardDark border border-white/5 rounded-[2.5rem] p-1 overflow-hidden transition-all duration-500 hover:border-gold/50 hover:bg-white/5 hover:backdrop-blur-md reveal">
       <button onclick="toggleUmrahWishlist(${pkg.id}, this)" class="absolute top-6 right-6 p-2.5 bg-white/10 rounded-full hover:bg-gold/20 transition-all group/heart z-10">
-        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(`umrah_${pkg.id}`) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
+        <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes("umrah_" + pkg.id) ? "text-gold fill-gold" : "text-gray-400"} group-hover/heart:text-gold transition-colors"></i>
       </button>
       <div class="p-8 md:p-10">
         <div class="flex justify-between items-start mb-6">
           <div>
             <span class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] bg-gold/10 px-3 py-1 rounded-full mb-3 inline-block">${pkg.tag}</span>
-            <h3 class="text-2xl md:text-3xl font-serif font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
+            <h3 class="text-2xl md:text-3xl font-bold text-white group-hover:text-gold transition-colors">${pkg.name}</h3>
           </div>
           <div class="text-right pt-4">
             <div class="text-3xl font-bold text-gold">${pkg.price}</div>
@@ -213,7 +209,7 @@ function showUmrahItinerary(id) {
   const content = document.getElementById("modal-content");
 
   content.innerHTML = `
-    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">${pkg.name}</h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">${pkg.name}</h2>
     <div class="space-y-8 mb-10 mt-8">
       ${pkg.itinerary
         .map(
@@ -244,7 +240,7 @@ function clearUmrahWishlist() {
 }
 
 function toggleUmrahWishlist(id, btn) {
-  const itemKey = `umrah_${id}`;
+  const itemKey = "umrah_" + id;
   let list = getWishlist();
   if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
   else list.push(itemKey);
@@ -287,7 +283,7 @@ function bookUmrah(id) {
       <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
         <i data-lucide="heart" class="text-gold w-10 h-10"></i>
       </div>
-      <h2 class="text-4xl font-serif font-bold text-white mb-4">Mubarak!</h2>
+      <h2 class="text-4xl font-bold text-white mb-4">Mubarak!</h2>
       <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Umrah Booking Initiated</p>
       <p class="text-gray-400 leading-relaxed mb-10 text-sm">
         Your request for the <span class="text-gold font-bold">${pkg.name}</span> has been successfully logged. 

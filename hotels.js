@@ -8,10 +8,6 @@ tailwind.config = {
         primaryDark: "#0a0a0a",
         cardDark: "#111111",
       },
-      fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        sans: ["Inter", "sans-serif"],
-      },
     },
   },
 };
@@ -98,7 +94,7 @@ function renderHotels(filter = "all") {
         </div>
       </div>
       <div class="p-8">
-        <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-gold transition-colors">${hotel.name}</h3>
+        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">${hotel.name}</h3>
         <div class="flex items-center gap-2 text-gray-400 text-xs mb-6 uppercase tracking-widest">
           <i data-lucide="map-pin" class="w-3 h-3 text-gold"></i>
           ${hotel.distance}
@@ -128,7 +124,7 @@ function showHotelDetails(id) {
       </div>
       <div class="md:w-1/2 p-8 md:p-12">
         <span class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-4 inline-block">${hotel.city} Premium</span>
-        <h2 class="text-3xl font-serif font-bold text-white mb-4">${hotel.name}</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">${hotel.name}</h2>
         <p class="text-gray-400 text-sm mb-8 italic">Experience ultimate comfort with our handpicked premium selection.</p>
         <ul class="space-y-3 mb-10">
           ${hotel.features

@@ -8,10 +8,6 @@ tailwind.config = {
         primaryDark: "#0a0a0a",
         cardDark: "#161616",
       },
-      fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        sans: ["Inter", "sans-serif"],
-      },
     },
   },
 };
@@ -37,7 +33,7 @@ const UI = {
           <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center">
             <i data-lucide="compass" class="text-black w-6 h-6"></i>
           </div>
-          <span class="text-2xl font-bold text-gold font-serif tracking-tighter">${this.brand}</span>
+          <span class="text-2xl font-bold text-gold tracking-tighter">${this.brand}</span>
         </div>
         <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80">
           ${this.links.map((link) => `<a href="${link.url}" class="hover:text-gold transition-colors">${link.name}</a>`).join("")}
@@ -54,7 +50,7 @@ const UI = {
     if (!container) return;
     container.innerHTML = `
       <footer class="bg-primaryDark py-12 px-8 border-t border-white/5 text-center">
-        <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">${this.brand}</div>
+        <div class="text-gold font-bold text-2xl mb-4 tracking-widest">${this.brand}</div>
         <p class="text-gray-500 text-sm mb-6">Your spiritual journey is our responsibility.</p>
         <p class="text-gold/60 text-[10px] uppercase tracking-[0.2em] mb-6 font-semibold">Owner: ${this.owner}</p>
         <div class="flex justify-center space-x-6 text-gray-400">
@@ -319,7 +315,7 @@ function bookDirect(id) {
       <div class="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 ring-8 ring-gold/5 animate-pulse">
         <i data-lucide="check-circle" class="text-gold w-12 h-12"></i>
       </div>
-      <h2 class="text-4xl font-serif font-bold text-white mb-4">Request Sent</h2>
+      <h2 class="text-4xl font-bold text-white mb-4">Request Sent</h2>
       <p class="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-8">Spiritual Journey Awaits</p>
       <p class="text-gray-400 leading-relaxed mb-10 text-sm">
         Assalamu Alaikum! You have selected the <span class="text-gold font-bold">${pkg.name}</span>. 

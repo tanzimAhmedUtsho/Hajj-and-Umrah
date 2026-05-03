@@ -8,10 +8,6 @@ tailwind.config = {
         primaryDark: "#0a0a0a",
         cardDark: "#111111",
       },
-      fontFamily: {
-        serif: ["Playfair Display", "serif"],
-        sans: ["Inter", "sans-serif"],
-      },
     },
   },
 };
