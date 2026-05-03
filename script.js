@@ -16,16 +16,84 @@ tailwind.config = {
   },
 };
 
+// Global UI Engine
+const UI = {
+  brand: "AL-SAFAR",
+  owner: "Tanzim Ahmed Utsho",
+  links: [
+    { name: "Home", url: "index.html" },
+    { name: "Hajj Packages", url: "hajj.html" },
+    { name: "Umrah Packages", url: "umrah.html" },
+    { name: "Premium Hotels", url: "hotels.html" },
+    { name: "Why Us", url: "why-us.html" },
+    { name: "Contact", url: "contact.html" },
+  ],
+  renderNavbar() {
+    const container = document.getElementById("navbar-container");
+    if (!container) return;
+    container.innerHTML = `
+      <nav id="navbar" class="w-full transition-all duration-500 py-6 px-8 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center">
+            <i data-lucide="compass" class="text-black w-6 h-6"></i>
+          </div>
+          <span class="text-2xl font-bold text-gold font-serif tracking-tighter">${this.brand}</span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80">
+          ${this.links.map((link) => `<a href="${link.url}" class="hover:text-gold transition-colors">${link.name}</a>`).join("")}
+        </div>
+        <div class="flex items-center space-x-6 text-white">
+          <i data-lucide="search" id="navbar-search-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
+          <i data-lucide="heart" id="navbar-wishlist-btn" class="w-5 h-5 cursor-pointer hover:text-gold"></i>
+          <button id="mobile-menu-btn" class="md:hidden text-gold"><i data-lucide="menu"></i></button>
+        </div>
+      </nav>`;
+  },
+  renderFooter() {
+    const container = document.getElementById("footer-container");
+    if (!container) return;
+    container.innerHTML = `
+      <footer class="bg-primaryDark py-12 px-8 border-t border-white/5 text-center">
+        <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">${this.brand}</div>
+        <p class="text-gray-500 text-sm mb-6">Your spiritual journey is our responsibility.</p>
+        <p class="text-gold/60 text-[10px] uppercase tracking-[0.2em] mb-6 font-semibold">Owner: ${this.owner}</p>
+        <div class="flex justify-center space-x-6 text-gray-400">
+          <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"></i>
+          <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"></i>
+          <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-gold transition-colors"></i>
+        </div>
+        <div class="mt-8 text-[10px] text-gray-600 uppercase tracking-[0.3em]">© 2024 ${this.brand} Travel Agency. All Rights Reserved.</div>
+      </footer>`;
+  },
+  renderTopBar() {
+    const container = document.getElementById("top-announcement-bar");
+    if (!container) return;
+    const text =
+      "Hajj 2026 Pre-Registration Open • 5-Star Hotels within 50m of Haram • Special Ramadan Umrah Packages Available • Expert Spiritual Guides";
+    container.innerHTML = `
+      <div class="bg-black/60 backdrop-blur-md border-b border-gold/10 py-3 overflow-hidden relative z-[60]">
+        <div class="flex whitespace-nowrap animate-marquee-fast hover:pause items-center">
+          <div class="flex items-center gap-16 px-8 text-gold font-bold uppercase tracking-[0.4em] text-[10px]">
+            ${Array(4).fill(`<span>${text}</span> <i data-lucide="sparkles" class="w-4 h-4"></i>`).join("")}
+          </div>
+        </div>
+      </div>`;
+  },
+};
+
 // Wishlist Helper Functions
 const WISH_KEY = "alsafar_wishlist";
-const getWishlist = () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
-const toggleStoredWishlist = (id, type) => {
-  const itemKey = `${type}_${id}`;
-  let list = getWishlist();
-  if (list.includes(itemKey)) list = list.filter((i) => i !== itemKey);
-  else list.push(itemKey);
-  localStorage.setItem(WISH_KEY, JSON.stringify(list));
-  return list.includes(itemKey);
+const Wishlist = {
+  get: () => JSON.parse(localStorage.getItem(WISH_KEY) || "[]"),
+  toggle: (id, type) => {
+    const itemKey = `${type}_${id}`;
+    let list = Wishlist.get();
+    list = list.includes(itemKey)
+      ? list.filter((i) => i !== itemKey)
+      : [...list, itemKey];
+    localStorage.setItem(WISH_KEY, JSON.stringify(list));
+    return list.includes(itemKey);
+  },
 };
 
 // Package Data
@@ -298,14 +366,10 @@ function closeSearchModal() {
 }
 
 function handleToggleWishlist(id, type, btn) {
-  const isLiked = toggleStoredWishlist(id, type);
+  const isLiked = Wishlist.toggle(id, type);
   const icon = btn.querySelector("svg");
   if (!icon) return;
-
-  icon.classList.toggle("fill-gold", isLiked);
-  icon.classList.toggle("text-gold", isLiked);
-  icon.classList.toggle("text-gray-400", !isLiked);
-  lucide.createIcons();
+  renderPackages("package-grid"); // Efficient re-render
 }
 
 function handleFilter(type, btn) {
@@ -336,12 +400,12 @@ function closeWishlistModal() {
 
 // Initialize everything on DOM load
 document.addEventListener("DOMContentLoaded", () => {
-  lucide.createIcons();
+  UI.renderTopBar();
+  UI.renderNavbar();
+  UI.renderFooter();
   renderSearchBar();
   renderPackages("package-grid");
-  if (document.getElementById("hajj-only-grid")) {
-    renderPackages("hajj-only-grid", "hajj");
-  }
+  lucide.createIcons();
 
   // Search Listeners
   const searchBtn = document.getElementById("navbar-search-btn");
