@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Why Choose Us | Al-Safar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="why-us.js" defer></script>
+    <style>
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stat-card {
+        background: linear-gradient(145deg, #111111, #0a0a0a);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-primaryDark text-gray-100 font-sans">
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 transition-all duration-500 py-6 px-8 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 bg-gold rounded-full flex items-center justify-center"
+        >
+          <i data-lucide="compass" class="text-black w-6 h-6"></i>
+        </div>
+        <span class="text-2xl font-bold text-gold font-serif tracking-tighter"
+          >AL-SAFAR</span
+        >
+      </div>
+      <div
+        class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-white/80"
+      >
+        <a href="index.html" class="hover:text-gold transition-colors">Home</a>
+        <a href="hajj.html" class="hover:text-gold transition-colors"
+          >Hajj Packages</a
+        >
+        <a href="umrah.html" class="hover:text-gold transition-colors"
+          >Umrah Packages</a
+        >
+        <a href="hotels.html" class="hover:text-gold transition-colors"
+          >Premium Hotels</a
+        >
+        <a href="#" class="text-gold">Why Us</a>
+        <a href="contact.html" class="hover:text-gold transition-colors"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
+    <section class="pt-40 pb-24 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-24 reveal">
+          <h1
+            class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight"
+          >
+            Our Legacy of <span class="text-gold italic">Trust</span>
+          </h1>
+          <p class="text-gray-400 max-w-3xl mx-auto text-lg">
+            At Al-Safar, we don't just provide travel services; we facilitate a
+            sacred spiritual transformation with honor and excellence.
+          </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32 reveal">
+          <div class="stat-card p-10 rounded-[2.5rem] text-center">
+            <div class="text-4xl font-serif font-bold text-gold mb-2">12+</div>
+            <div
+              class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold"
+            >
+              Years of Experience
+            </div>
+          </div>
+          <div class="stat-card p-10 rounded-[2.5rem] text-center">
+            <div class="text-4xl font-serif font-bold text-gold mb-2">
+              8.5k+
+            </div>
+            <div
+              class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold"
+            >
+              Happy Pilgrims
+            </div>
+          </div>
+          <div class="stat-card p-10 rounded-[2.5rem] text-center">
+            <div class="text-4xl font-serif font-bold text-gold mb-2">98%</div>
+            <div
+              class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold"
+            >
+              Visa Success Rate
+            </div>
+          </div>
+          <div class="stat-card p-10 rounded-[2.5rem] text-center">
+            <div class="text-4xl font-serif font-bold text-gold mb-2">50+</div>
+            <div
+              class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold"
+            >
+              Partner Hotels
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Reasons -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div
+            class="bg-cardDark p-10 rounded-[3rem] border border-white/5 hover:border-gold/30 transition-all duration-500 reveal"
+          >
+            <div
+              class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mb-8"
+            >
+              <i data-lucide="shield-check" class="text-gold w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">
+              Ministry Approved
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              We are a fully licensed travel agency authorized by the Ministry
+              of Hajj & Umrah. Your security and legal protection are our
+              highest priorities.
+            </p>
+          </div>
+
+          <div
+            class="bg-cardDark p-10 rounded-[3rem] border border-white/5 hover:border-gold/30 transition-all duration-500 reveal"
+          >
+            <div
+              class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mb-8"
+            >
+              <i data-lucide="book-open" class="text-gold w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">
+              Spiritual Guidance
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Our journeys are accompanied by experienced Islamic scholars who
+              provide continuous guidance on Manasik-e-Hajj and spiritual
+              etiquette.
+            </p>
+          </div>
+
+          <div
+            class="bg-cardDark p-10 rounded-[3rem] border border-white/5 hover:border-gold/30 transition-all duration-500 reveal"
+          >
+            <div
+              class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mb-8"
+            >
+              <i data-lucide="hotel" class="text-gold w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">
+              Prime Proximity
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              We guarantee accommodation in premium hotels located at the
+              shortest possible distance from Al-Haram in Makkah and Al-Masjid
+              an-Nabawi in Madinah.
+            </p>
+          </div>
+
+          <div
+            class="bg-cardDark p-10 rounded-[3rem] border border-white/5 hover:border-gold/30 transition-all duration-500 reveal"
+          >
+            <div
+              class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mb-8"
+            >
+              <i data-lucide="heart-handshake" class="text-gold w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-white mb-4">
+              Personalized Care
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              From elderly assistance to medical emergencies, our dedicated
+              ground team in Saudi Arabia is available 24/7 to serve every
+              individual pilgrim.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-32 text-center reveal">
+          <div class="bg-gold p-16 rounded-[4rem] text-black">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">
+              Ready to start your journey?
+            </h2>
+            <p
+              class="text-black/70 mb-10 max-w-xl mx-auto font-bold uppercase tracking-widest text-xs"
+            >
+              Join thousands of pilgrims who chose excellence for their sacred
+              journey.
+            </p>
+            <a
+              href="contact.html"
+              class="bg-black text-gold px-12 py-5 rounded-full font-black tracking-widest text-sm hover:bg-white hover:text-black transition-all"
+              >CONSULT WITH US</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-black py-12 px-8 border-t border-white/5 text-center">
+      <div class="text-gold font-serif font-bold text-2xl mb-4 tracking-widest">
+        AL-SAFAR
+      </div>
+      <p
+        class="text-gold/60 text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >
+        Owner: Tanzim Ahmed Utsho
+      </p>
+      <div class="mt-8 text-[10px] text-gray-600 uppercase tracking-[0.3em]">
+        © 2024 Al-Safar Travel Agency. All Rights Reserved.
+      </div>
+    </footer>
+  </body>
+</html>
